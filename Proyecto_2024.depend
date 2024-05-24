@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1716587200 source:d:\tomi\onedrive\documentos\github\proyecto-2024\main.cpp
+	<iostream>
+
+1716587364 source:d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1716587197 d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.h
+
+1716587201 source:d:\tomi\onedrive\documentos\github\proyecto-2024\persona.cpp
+	<iostream>
+	"Persona.h"
+
+1716588352 d:\tomi\onedrive\documentos\github\proyecto-2024\persona.h
+	"stdio.h"
+	"string.h"
+	"Fecha.h"
+
+1716589153 source:d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.cpp
+	<iostream>
+	"Vendedor.h"
+
+1716589164 d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.h
+	"Persona.h"
+	"Fecha.h"
+

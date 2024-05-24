@@ -1,9 +1,9 @@
 #include <iostream>
 
 using namespace std;
+#include "Headers.h"
 
-int main()
-{
-    cout << "Hello world!" << endl;
+int main() {
+
     return 0;
 }
