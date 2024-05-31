@@ -42,5 +42,8 @@ class Producto{
 
 };
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 #endif // PRODUCTO_H_INCLUDED

@@ -20,7 +20,10 @@ void Producto::Cargar() {
     cin >> _ID;
     cin.ignore();
     cout << "Marca: ";
+<<<<<<< Updated upstream
     cin.ignore();
+=======
+>>>>>>> Stashed changes
     cin.getline(_Marca, 20);
     cout << "Descripcion: ";
     cin.ignore();
