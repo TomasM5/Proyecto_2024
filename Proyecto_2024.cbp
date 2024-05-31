@@ -34,13 +34,24 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Cliente.cpp" />
+		<Unit filename="Cliente.h" />
+		<Unit filename="DetalleVenta.cpp" />
+		<Unit filename="DetalleVenta.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
+		<Unit filename="Funciones.h" />
 		<Unit filename="Headers.h" />
 		<Unit filename="Persona.cpp" />
 		<Unit filename="Persona.h" />
+		<Unit filename="Producto.cpp" />
+		<Unit filename="Producto.h" />
+		<Unit filename="Proveedor.cpp" />
+		<Unit filename="Proveedor.h" />
 		<Unit filename="Vendedor.cpp" />
 		<Unit filename="Vendedor.h" />
+		<Unit filename="Venta.cpp" />
+		<Unit filename="Venta.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
