@@ -1,0 +1,39 @@
+#ifndef DETALLEVENTA_H_INCLUDED
+#define DETALLEVENTA_H_INCLUDED
+
+#include "Venta.h"
+
+class DetalleVenta {
+public:
+    DetalleVenta();
+
+    void Cargar();
+    void Mostrar();
+    float MontoFinal();
+    float CalcularDescuento();
+    void Grabar_Archivo();
+    void Leer_Archivo();
+
+    void setVenta(Venta val) { _Venta = val; }
+    void setIDproducto(int val) { _IDproducto = val; }
+    void setCantidad(int val) { _Cantidad = val; }
+    void setMonto(float val) { _Monto = val; }
+    void setDescuento(float val) { _Descuento = val; }
+
+    Venta getVenta() { return _Venta; }
+    int getIDproducto() { return _IDproducto; }
+    int getCantidad() { return _Cantidad; }
+    float getMonto() { return _Monto; }
+    float getDescuento() { return _Descuento; }
+
+protected:
+
+private:
+    Venta _Venta;
+    int _IDproducto;
+    int _Cantidad;
+    float _Monto;
+    float _Descuento;
+};
+
+#endif // DETALLEVENTA_H_INCLUDED
