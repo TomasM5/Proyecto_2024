@@ -5,8 +5,7 @@
 #include "Fecha.h"
 
 
-class Vendedor : public Persona
-{
+class Vendedor : public Persona {
     public:
         Vendedor();
         void Cargar();
@@ -17,12 +16,14 @@ class Vendedor : public Persona
         void Leer_Archivo();
 
         void setLegajo(int val) { _Legajo = val; }
-        void setSalario(float val) { _Salario = val; }
+        void setSalarioBase(float val) { _SalarioBase = val; }
+        void setSalarioTotal(float val) { _SalarioTotal = val; }
         void setComision(float val) { _Comision = val; }
         void setIngreso(Fecha val) { _Ingreso = val; }
         void setEstado(int val) { _Estado = val; }
         int getLegajo() { return _Legajo; }
-        float getSalario() { return _Salario; }
+        float getSalarioBase() { return _SalarioBase; }
+        float getSalarioTotal() { return _SalarioTotal; }
         float getComision() { return _Comision; }
         Fecha getIngreso() { return _Ingreso; }
         int getEstado() { return _Estado; }
@@ -31,7 +32,8 @@ class Vendedor : public Persona
 
     private:
         int _Legajo;
-        float _Salario;
+        float _SalarioBase;
+        float _SalarioTotal;
         float _Comision;
         Fecha _Ingreso;
         int _Estado;

@@ -1,27 +1,31 @@
 # depslib dependency file v1.0
-1716587200 source:d:\tomi\onedrive\documentos\github\proyecto-2024\main.cpp
+1717474707 source:d:\tomi\onedrive\documentos\github\proyecto-2024\main.cpp
 	<iostream>
+	"Headers.h"
+	"Funciones.h"
 
-1716587364 source:d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.cpp
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1716587197 d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.h
+1717128269 d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.h
 
-1716587201 source:d:\tomi\onedrive\documentos\github\proyecto-2024\persona.cpp
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\persona.cpp
 	<iostream>
 	"Persona.h"
 
-1716588352 d:\tomi\onedrive\documentos\github\proyecto-2024\persona.h
-	"stdio.h"
-	"string.h"
+1717469736 d:\tomi\onedrive\documentos\github\proyecto-2024\persona.h
+	<cstdio>
+	<cstring>
 	"Fecha.h"
 
-1716589153 source:d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.cpp
+1717474707 source:d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.cpp
 	<iostream>
+	<cstdio>
+	"DetalleVenta.h"
 	"Vendedor.h"
 
-1716589164 d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.h
+1717474235 d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.h
 	"Persona.h"
 	"Fecha.h"
 
@@ -106,4 +110,58 @@
 
 1717463286 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\funciones.h
 	<cstring>
+
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.cpp
+	<iostream>
+	<cstdio>
+	"Cliente.h"
+
+1717469736 d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.h
+	<cstring>
+	<cstdio>
+	"Persona.h"
+
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\detalleventa.cpp
+	<iostream>
+	<cstdio>
+	"DetalleVenta.h"
+
+1717137417 d:\tomi\onedrive\documentos\github\proyecto-2024\detalleventa.h
+	"Venta.h"
+
+1717137417 d:\tomi\onedrive\documentos\github\proyecto-2024\venta.h
+	"Fecha.h"
+
+1717137506 d:\tomi\onedrive\documentos\github\proyecto-2024\headers.h
+	"Fecha.h"
+	"Persona.h"
+	"Vendedor.h"
+	"Cliente.h"
+	"Proveedor.h"
+	"Producto.h"
+	"Venta.h"
+	"DetalleVenta.h"
+
+1717469736 d:\tomi\onedrive\documentos\github\proyecto-2024\proveedor.h
+	"Persona.h"
+
+1717469736 d:\tomi\onedrive\documentos\github\proyecto-2024\producto.h
+	<cstring>
+	<cstdio>
+
+1717469736 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
+	<cstring>
+
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
+	<iostream>
+	<cstdio>
+	"Producto.h"
+
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\proveedor.cpp
+	<iostream>
+	"Proveedor.h"
+
+1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\venta.cpp
+	<iostream>
+	"Venta.h"
 
