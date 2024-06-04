@@ -1,8 +1,8 @@
 #include<iostream>
-
+#include<cstdio>
+#include "Producto.h"
 using namespace std;
 
-#include "Producto.h"
 
 Producto::Producto() {
     _ID = 0;
@@ -22,7 +22,6 @@ void Producto::Cargar() {
     cout << "Marca: ";
     cin.getline(_Marca, 20);
     cout << "Descripcion: ";
-    cin.ignore();
     cin.getline(_Descripcion, 50);
     cout << "Categoria: ";
     cin >> _Categoria;
@@ -46,9 +45,23 @@ void Producto::Mostrar() {
 }
 
 void Producto::Grabar_Archivo() {
-    //completar
+    FILE *file = fopen("productos.dat", "ab");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    fwrite(this, sizeof(Producto), 1, file);
+    fclose(file);
 }
 
 void Producto::Leer_Archivo() {
-    //completar
+    FILE *file = fopen("productos.dat", "rb");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    while(fread(this, sizeof(Producto), 1, file)){
+        Mostrar();
+    }
+    fclose(file);
 }

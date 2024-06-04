@@ -1,8 +1,8 @@
 #include<iostream>
-
+#include<cstdio>
+#include "Cliente.h"
 using namespace std;
 
-#include "Cliente.h"
 
 Cliente::Cliente(){
     strcpy(_Domicilio, "");
@@ -18,10 +18,8 @@ void Cliente::Cargar() {
     cin.ignore();
     cin.getline(_Domicilio, 50);
     cout << "Correo: ";
-    cin.ignore();
     cin.getline(_Email, 50);
     cout << "Telefono: ";
-    cin.ignore();
     cin.getline(_Telefono, 15);
     cout << "Banco: ";
     cin >> _Banco;
@@ -37,10 +35,23 @@ void Cliente::Mostrar() {
 }
 
 void Cliente::Grabar_Archivo() {
-    //completar
-
+    FILE *file = fopen("clientes.dat", "ab");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    fwrite(this, sizeof(Cliente), 1, file);
+    fclose(file);
 }
 
 void Cliente::Leer_Archivo() {
-    //completar
+    FILE *file = fopen("cliente.dat", "rb");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    while(fread(this, sizeof(Cliente), 1, file)){
+        Mostrar();
+    }
+    fclose(file);
 }

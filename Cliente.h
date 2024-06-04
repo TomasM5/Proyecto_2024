@@ -2,7 +2,7 @@
 #define CLIENTE_H_INCLUDED
 
 #include <cstring>
-#include "stdio.h"
+#include <cstdio>
 #include "Persona.h"
 
 class Cliente : public Persona{
@@ -14,13 +14,13 @@ class Cliente : public Persona{
         void Grabar_Archivo();
         void Leer_Archivo();
 
-        void setDomicilio(char val) { strcpy(_Domicilio, val;) }
-        void setCorreo(char val) { strcpy(_Email, val;) }
-        void setTelefono(char val) { strcpy(_Telefono, val;) }
+        void setDomicilio(const char* val) { strcpy(_Domicilio, val); }
+        void setCorreo(const char* val) { strcpy(_Email, val); }
+        void setTelefono(const char* val) { strcpy(_Telefono, val); }
         void setBanco(int val) { _Banco = val; }
-        const char *geDomicilio() { return _Domicilio; }
-        const char *getCorreo() { return _Email; }
-        const char *getTelefono() { return _Telefono; }
+        const char* getDomicilio() { return _Domicilio; }
+        const char* getCorreo() { return _Email; }
+        const char* getTelefono() { return _Telefono; }
         int getBanco() { return _Banco; }
 
     protected:

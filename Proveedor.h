@@ -10,7 +10,7 @@ class Proveedor : public Persona{
         void Cargar();
         void Mostrar();
 
-        void setEmpresa(const char *var){ strcpy(_Empresa, var;)}
+        void setEmpresa(const char *var){ strcpy(_Empresa, var);}
         const char *getEmpresa(){ return _Empresa;}
 
     protected:

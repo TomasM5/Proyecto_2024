@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstdio>
 #include "DetalleVenta.h"
 using namespace std;
 
@@ -30,17 +31,31 @@ void DetalleVenta::Mostrar() {
 }
 
 float DetalleVenta::MontoFinal() {
-    //completar
+    return _Monto - CalcularDescuento();
 }
 
 float DetalleVenta::CalcularDescuento() {
-    //completar
+    return _Monto * (_Descuento / 100);
 }
 
 void DetalleVenta::Grabar_Archivo() {
-    //completar
+    FILE *file = fopen("detalle_venta.dat", "ab");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    fwrite(this, sizeof(DetalleVenta), 1, file);
+    fclose(file);
 }
 
 void DetalleVenta::Leer_Archivo() {
-    //completar
+    FILE *file = fopen("detalle_venta.dat", "rb");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return;
+    }
+    while(fread(this, sizeof(DetalleVenta), 1, file)){
+        Mostrar();
+    }
+    fclose(file);
 }

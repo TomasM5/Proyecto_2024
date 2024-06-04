@@ -107,7 +107,7 @@ void Consulta_Producto() {
     system("cls");
     Nombre_Local();
     cout << "BUSQUEDA DE PRODUCTOS" << endl;
-    cout << "1 - Buscar por ID"
+    cout << "1 - Buscar por ID" << endl;
     cout << "2 - Buscar por categoria" << endl;
     cout << "3 - Buscar por rango de precio" << endl;
     cout << "4 - Buscar por fecha de ingreso" << endl;

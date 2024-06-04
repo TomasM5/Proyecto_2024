@@ -9,9 +9,9 @@ using namespace std;
 
 
 Fecha::Fecha() {
-    setDia(0);
-    setMes(0);
-    setAnio(0000);
+    setDia(1);
+    setMes(1);
+    setAnio(1970);
 }
 
 Fecha::Fecha(int d, int m, int a) {

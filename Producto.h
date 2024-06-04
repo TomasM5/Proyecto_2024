@@ -2,6 +2,7 @@
 #define PRODUCTO_H_INCLUDED
 
 #include <cstring>
+#include <cstdio>
 
 class Producto{
     public:
@@ -13,8 +14,8 @@ class Producto{
         void Leer_Archivo();
 
         void setID(int val){ _ID = val;}
-        void setMarca(const char *val){ strcpy(_Marca, val;)}
-        void setDescripcion(const char *val){ strcpy(_Descripcion, val;)}
+        void setMarca(const char *val){ strcpy(_Marca, val);}
+        void setDescripcion(const char *val){ strcpy(_Descripcion, val);}
         void setCategoria(int val){ _Categoria = val;}
         void setStock(int val){ _Stock  = val;}
         void setValor(float val){ _Valor = val;}

@@ -1,13 +1,16 @@
 #ifndef PERSONA_H
 #define PERSONA_H
-#include "stdio.h"
-#include "string.h"
+#include <cstdio>
+#include <cstring>
 #include "Fecha.h"
 
 class Persona
 {
     public:
         Persona();
+
+        void Cargar();
+        void Mostrar();
 
         void setID (int val) { _ID = val; }
         void setNombre (char *val) { strcpy(_Nombre, val); }

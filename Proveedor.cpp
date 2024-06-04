@@ -1,8 +1,6 @@
 #include<iostream>
-
-using namespace std;
-
 #include "Proveedor.h"
+using namespace std;
 
 
 Proveedor::Proveedor(){
