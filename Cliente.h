@@ -18,10 +18,17 @@ class Cliente : public Persona{
         void setCorreo(const char* val) { strcpy(_Email, val); }
         void setTelefono(const char* val) { strcpy(_Telefono, val); }
         void setBanco(int val) { _Banco = val; }
+
         const char* getDomicilio() { return _Domicilio; }
         const char* getCorreo() { return _Email; }
         const char* getTelefono() { return _Telefono; }
         int getBanco() { return _Banco; }
+
+        void registrarCliente();
+        void listarClientes();
+        void buscarClientePorID(int id);
+        void buscarClientePorDNI(int dni);
+        void buscarClientePorNombre(const char* nombre);
 
     protected:
 

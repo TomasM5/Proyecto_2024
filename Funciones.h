@@ -2,11 +2,14 @@
 #define FUNCIONES_H_INCLUDED
 
 #include <cstring>
+#include <iostream>
 
-void Nombre_Local () {
+using namespace std;
+
+void Nombre_Local(){
     cout << "           --------    DECORACIONES LUZ TORMENTOSA   ------" << endl << endl;
 }
-void Menu_Principal (){
+void Menu_Principal(){
     system("cls");
     Nombre_Local();
     cout << "           --------    MENU PRINCIPAL  -----------" << endl << endl;
@@ -22,10 +25,10 @@ void Menu_Principal (){
     cout << "4 - Vendedores" << endl;
     //cargar vendedor,listar/buscar vendedor, salarios, ventas por vendedor
 
-    //cout << "5- Proveedores" << endl;
+    cout << "5 - Proveedores" << endl;
     // reportes de compras del local?
 
-    cout << "- Configuracion" << endl;
+    cout << "6 - Configuracion" << endl;
     // ->  cargar proveedor,copias de seguridad
 
     cout << "0 - Salir";
@@ -35,23 +38,55 @@ void Menu_Principal (){
 
 }
 
-void Menu_Ventas () {
+void Menu_Ventas(){
     system("cls");
     Nombre_Local();
     cout << "           -------     VENTAS   ----------" << endl << endl;
     cout << "1 - Registrar Venta" << endl;
     cout << "2 - Historial de ventas" << endl; // listado de venta por fecha, ¿incluir consulta aca? puede solicitar fecha y de lo contrario mostrar todo
-    cout << "3 - Buscar ID" << endl;
+    cout << "3 - Buscar venta por ID" << endl;
     cout << "4 - Ventas por cliente" << endl;
     cout << "5 - Ventas por producto" << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
     //  producto mas vendido?
-
 }
 
-void Menu_Clientes () {
+void SubMenuVentas(){
+    int opcVentas;
+    Venta venta;
+    do{
+        Menu_Ventas();
+        cin >> opcVentas;
+        switch(opcVentas) {
+            case 1:
+                venta.registrarVenta();
+                break;
+            case 2:
+                venta.historialVentas();
+                break;
+            case 3:
+                venta.buscarVenta();
+                break;
+            case 4:
+                venta.ventasPorCliente();
+                break;
+            case 5:
+                venta.ventasPorProducto();
+                break;
+            case 0:
+                cout << "Volviendo al menú principal..." << endl;
+                return;
+            default:
+                cout << "Opcion no valida. Intente nuevamente." << endl;
+                break;
+            }
+        if(opcVentas != 0) system("pause");
+    }while(opcVentas != 0);
+}
+
+void Menu_Clientes(){
     system("cls");
     Nombre_Local();
     cout << "           -------     CLIENTES   ----------" << endl << endl;
@@ -66,7 +101,54 @@ void Menu_Clientes () {
     //consulta por tipo de consumidor?
 }
 
-void Lista_Clientes() {
+void SubMenuClientes(){
+    int opcClientes;
+    Cliente cliente;
+    do {
+        Menu_Clientes();
+        cin >> opcClientes;
+        switch (opcClientes) {
+            case 1:
+                cliente.registrarCliente();
+                break;
+            case 2:
+                cliente.listarClientes();
+                break;
+            case 3: {
+                int id;
+                cout << "Ingrese ID del cliente: ";
+                cin >> id;
+                cliente.buscarClientePorID(id);
+                break;
+            }
+            case 4: {
+                int dni;
+                cout << "Ingrese DNI del cliente: ";
+                cin >> dni;
+                cliente.buscarClientePorDNI(dni);
+                break;
+            }
+            case 5: {
+                char nombre[50];
+                cout << "Ingrese nombre del cliente: ";
+                cin.ignore();
+                cin.getline(nombre, 50);
+                cliente.buscarClientePorNombre(nombre);
+                break;
+            }
+            case 0:
+                cout << "Volviendo al menú principal..." << endl;
+                return;
+                break;
+            default:
+                cout << "Opción inválida. Intente nuevamente." << endl;
+                break;
+        }
+        if(opcClientes != 0) system("pause");
+    } while (opcClientes != 0);
+}
+
+void Lista_Clientes(){
     system("cls");
     Nombre_Local();
     cout << "LISTAR CLIENTES" << endl;
@@ -77,7 +159,7 @@ void Lista_Clientes() {
     cout << "Ingrese la opcion: ";
 }
 
-void Menu_Inventario() {
+void Menu_Inventario(){
     system("cls");
     Nombre_Local();
     cout << "           --------    INVENTARIO  -----------" << endl << endl;
@@ -90,7 +172,7 @@ void Menu_Inventario() {
 
 }
 
-void Lista_Inventario() {
+void Lista_Inventario(){
     system("cls");
     Nombre_Local();
     cout << "LISTAR INVENTARIO" << endl;
@@ -103,7 +185,98 @@ void Lista_Inventario() {
     cout << "Ingrese la opcion: ";
 }
 
-void Consulta_Producto() {
+void Menu_Vendedores(){
+    system("cls");
+    Nombre_Local();
+    cout << "           -------     VENDEDORES   ----------" << endl << endl;
+    cout << "1 - Registrar Vendedor" << endl;
+    cout << "2 - Listar Vendedores" << endl;
+    cout << "3 - Buscar Vendedor" << endl;
+    cout << "4 - Calcular Salarios" << endl;
+    cout << "5 - Ventas por Vendedor" << endl;
+    cout << "0 - Volver al menu principal" << endl;
+    cout << endl << endl;
+    cout << "Ingrese la opcion: ";
+}
+
+void SubMenuVendedores(){
+    int opcVendedores;
+    Vendedor vendedor;
+    do {
+        Menu_Vendedores();
+        cin >> opcVendedores;
+        switch (opcVendedores) {
+            case 1:
+                vendedor.registrarVendedor();
+                break;
+            case 2:
+                vendedor.listarVendedores();
+                break;
+            case 3: {
+                vendedor.buscarVendedor();
+                break;
+            }
+            case 4:
+                vendedor.calcularSalarios();
+                break;
+            case 5:
+                vendedor.ventasPorVendedor();
+                break;
+            case 0:
+                cout << "Volviendo al menú principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcVendedores != 0) system("pause");
+    } while (opcVendedores != 0);
+}
+
+void Menu_Proveedores(){
+    system("cls");
+    Nombre_Local();
+    cout << "           -------     PROVEEDORES   ----------" << endl << endl;
+    cout << "1 - Registrar Proveedor" << endl;
+    cout << "2 - Listar Proveedores" << endl;
+    cout << "3 - Buscar Proveedor" << endl;
+    cout << "4 - Compras por Proveedor" << endl;
+    cout << "0 - Volver al menu principal" << endl;
+    cout << endl << endl;
+    cout << "Ingrese la opcion: ";
+}
+
+void SubmenuProveedores(){
+    int opcProveedores;
+    Proveedor proveedor;
+    do{
+        Menu_Proveedores();
+        cin >> opcProveedores;
+        switch (opcProveedores){
+            case 1:
+                proveedor.registrarProveedor();
+                break;
+            case 2:
+                proveedor.listarProveedores();
+                break;
+            case 3:
+                proveedor.buscarProveedor();
+                break;
+            case 4:
+                proveedor.comprasPorProveedor();
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcProveedores != 0) system("pause");
+    }while(opcProveedores != 0);
+}
+
+void Consulta_Producto(){
     system("cls");
     Nombre_Local();
     cout << "BUSQUEDA DE PRODUCTOS" << endl;
@@ -115,7 +288,7 @@ void Consulta_Producto() {
     cout << "Ingrese la opcion: ";
 }
 
-void Menu_Configuracion () {
+void Menu_Configuracion(){
     system("cls");
     Nombre_Local();
     cout << "           --------    CONFIGURACION  -----------" << endl << endl;
@@ -127,7 +300,7 @@ void Menu_Configuracion () {
 
 }
 
-void Menu_Copia_Seguridad() {
+void Menu_Copia_Seguridad(){
     cout << "REALIZAR COPIA DE SEGURIDAD" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;
@@ -141,7 +314,7 @@ void Menu_Copia_Seguridad() {
     cout << "OPCION: ";
 }
 
-void Menu_Restaurar_Copia () {
+void Menu_Restaurar_Copia(){
     cout << "RESTAURAR COPIA DE SEGURIDAD" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;
@@ -155,7 +328,7 @@ void Menu_Restaurar_Copia () {
     cout << "OPCION: ";
 }
 
-void Menu_Exportar() {
+void Menu_Exportar(){
     cout << "EXPORTAR ARCHIVOS CSV" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;

@@ -3,7 +3,7 @@
 
 #include "Fecha.h"
 
-class Venta {
+class Venta{
 public:
     Venta();
 
@@ -23,6 +23,13 @@ public:
     int getIDcliente(){ return _IDcliente; }
     int getFormaPago(){ return _FormaPago; }
     bool getEnvio(){ return _Envio; }
+
+    void registrarVenta();
+    void listarVentas();
+    void buscarVenta();
+    void historialVentas();
+    void ventasPorCliente();
+    void ventasPorProducto();
 
 private:
     int _ID;

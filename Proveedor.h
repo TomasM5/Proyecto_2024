@@ -13,6 +13,11 @@ class Proveedor : public Persona{
         void setEmpresa(const char *var){ strcpy(_Empresa, var);}
         const char *getEmpresa(){ return _Empresa;}
 
+        void registrarProveedor();
+        void listarProveedores();
+        void buscarProveedor();
+        void comprasPorProveedor();
+
     protected:
 
     private:

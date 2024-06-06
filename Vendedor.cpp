@@ -5,15 +5,14 @@
 using namespace std;
 
 
-Vendedor::Vendedor() {
-    //ctor
+Vendedor::Vendedor(){
     setLegajo(0);
     setSalarioBase(0);
     setComision(0);
     setEstado(0);
 }
 
-void Vendedor::Cargar() {
+void Vendedor::Cargar(){
     int leg;
     Fecha ing;
     float sal;
@@ -33,7 +32,7 @@ void Vendedor::Cargar() {
     setEstado(1);
 }
 
-void Vendedor::Mostrar() {
+void Vendedor::Mostrar(){
     Fecha ing=getIngreso();
 
     cout << "Mostrar vendedor: " << endl;
@@ -58,7 +57,7 @@ void Vendedor::Mostrar() {
     setComision(comi);
 }*/
 
-void Vendedor::salarioTotal() {
+void Vendedor::salarioTotal(){
     float sal;
 
     sal= getSalarioBase() + getComision();
@@ -68,11 +67,11 @@ void Vendedor::salarioTotal() {
     // agregar webadas como obra social y aportes?
 }
 
-void Vendedor::Grabar_Archivo() {
+void Vendedor::Grabar_Archivo(){
     FILE *file = fopen("vendedores.dat", "ab");
 
     if(file == NULL){
-      cout << "Error al abrir el archivo." << endl;
+      cout << "Error al abrir el archivo" << endl;
       return;
     }
 
@@ -80,7 +79,7 @@ void Vendedor::Grabar_Archivo() {
     fclose(file);
 }
 
-void Vendedor::Leer_Archivo() {
+void Vendedor::Leer_Archivo(){
     FILE *file = fopen("vendedores.dat", "rb");
 
     if (file==NULL) {
@@ -88,8 +87,102 @@ void Vendedor::Leer_Archivo() {
         return;
     }
 
-    while (fread(this, sizeof(Vendedor), 1, file)) {
+    while(fread(this, sizeof(Vendedor), 1, file)){
         Mostrar();
     }
     fclose(file);
+}
+
+void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
+    Cargar();
+    Grabar_Archivo();
+    cout << "Vendedor registrado correctamente" << endl;
+}
+
+void Vendedor::listarVendedores(){ ///muestra todos los vendedores registrados
+    FILE *file = fopen("vendedores.dat", "rb");
+    if (file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Vendedor vendedor;
+    while(fread(&vendedor, sizeof(Vendedor), 1, file)){
+        vendedor.Mostrar();
+        cout << endl;
+    }
+    fclose(file);
+}
+
+void Vendedor::buscarVendedor(){ ///busca y muestra un vendedor por su legajo
+    int legajo;
+    cout << "Ingrese el legajo del vendedor: ";
+    cin >> legajo;
+
+    FILE *file = fopen("vendedores.dat", "rb");
+    if (file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Vendedor vendedor;
+    bool encontrado = false;
+    while(fread(&vendedor, sizeof(Vendedor), 1, file)){
+        if(vendedor.getLegajo() == legajo){
+            vendedor.Mostrar();
+            encontrado = true;
+            break;
+        }
+    }
+    fclose(file);
+
+    if(!encontrado){
+        cout << "No se encontro un vendedor con el legajo " << legajo << endl;
+    }
+}
+
+void Vendedor::calcularSalarios(){///calcular y actualiza los salarios de todos los vendedores
+    FILE *file = fopen("vendedores.dat", "rb+");
+    if (file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Vendedor vendedor;
+    bool encontrado = false;
+    while(fread(&vendedor, sizeof(Vendedor), 1, file)){
+        vendedor.salarioTotal();
+        fseek(file, -sizeof(Vendedor), SEEK_CUR);
+        fwrite(&vendedor, sizeof(Vendedor), 1, file);
+    }
+    fclose(file);
+
+    cout << "Salarios calculados y actualizados exitosamente" << endl;
+}
+
+void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un vendedor especifico
+    int legajo;
+    cout << "Ingrese el legajo del vendedor: ";
+    cin >> legajo;
+
+    FILE *file = fopen("ventas.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo de ventas" << endl;
+        return;
+    }
+
+    Venta venta;
+    bool encontrado = false;
+    while(fread(&venta, sizeof(Venta), 1, file)){
+        if(venta.getLegajoVendedor() == legajo){
+            venta.Mostrar();
+            cout << endl;
+            encontrado = true;
+        }
+    }
+    fclose(file);
+
+    if (!encontrado) {
+        cout << "No se encontraron ventas para el legajo " << legajo << endl;
+    }
 }

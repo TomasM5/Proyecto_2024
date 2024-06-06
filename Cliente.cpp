@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdio>
+#include<cstring>
 #include "Cliente.h"
 using namespace std;
 
@@ -34,20 +35,91 @@ void Cliente::Mostrar() {
     cout << "Banco: " << _Banco << endl;
 }
 
-void Cliente::Grabar_Archivo() {
+void Cliente::registrarCliente(){ ///carga un nuevo cliente y lo graba en el archivo
+    Cargar();
+    Grabar_Archivo();
+    cout << "Cliente registrado exitosamente" << endl;
+}
+
+void Cliente::listarClientes(){ ///muestra todos los clientes registrados
+    FILE *file = fopen("clientes.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    while(fread(this, sizeof(Cliente), 1, file)){
+        Mostrar();
+    }
+    fclose(file);
+}
+
+void Cliente::buscarClientePorID(int id){ ///busca y muestra un cliente por su ID
+    FILE *file = fopen("clientes.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+    while(fread(this, sizeof(Cliente), 1, file)){
+        if(this->getID() == id) {
+            Mostrar();
+            fclose(file);
+            return;
+        }
+    }
+    cout << "Cliente no encontrado" << endl;
+    fclose(file);
+}
+
+void Cliente::buscarClientePorDNI(int dni){ ///busca y muestra un cliente por su DNI
+    FILE *file = fopen("clientes.dat", "rb");
+    if(file == NULL) {
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    while(fread(this, sizeof(Cliente), 1, file)){
+        if(this->getDNI() == dni){
+            Mostrar();
+            fclose(file);
+            return;
+        }
+    }
+    cout << "Cliente no encontrado" << endl;
+    fclose(file);
+}
+
+void Cliente::buscarClientePorNombre(const char* nombre){ ///busca y muestra un cliente por su nombre
+    FILE *file = fopen("clientes.dat", "rb");
+    if(file == NULL) {
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+    while(fread(this, sizeof(Cliente), 1, file)) {
+        if(strcmp(this->getNombre(), nombre) == 0) {
+            Mostrar();
+            fclose(file);
+            return;
+        }
+    }
+    cout << "Cliente no encontrado" << endl;
+    fclose(file);
+}
+
+void Cliente::Grabar_Archivo(){
     FILE *file = fopen("clientes.dat", "ab");
     if(file == NULL){
-      cout << "Error al abrir el archivo." << endl;
+      cout << "Error al abrir el archivo" << endl;
       return;
     }
     fwrite(this, sizeof(Cliente), 1, file);
     fclose(file);
 }
 
-void Cliente::Leer_Archivo() {
-    FILE *file = fopen("cliente.dat", "rb");
+void Cliente::Leer_Archivo(){
+    FILE *file = fopen("clientes.dat", "rb");
     if(file == NULL){
-      cout << "Error al abrir el archivo." << endl;
+      cout << "Error al abrir el archivo" << endl;
       return;
     }
     while(fread(this, sizeof(Cliente), 1, file)){

@@ -28,6 +28,12 @@ class Vendedor : public Persona {
         Fecha getIngreso() { return _Ingreso; }
         int getEstado() { return _Estado; }
 
+        void registrarVendedor();
+        void listarVendedores();
+        void buscarVendedor();
+        void calcularSalarios();
+        void ventasPorVendedor();
+
     protected:
 
     private:

@@ -17,6 +17,10 @@ class Fecha {
         int getMes() { return _Mes; }
         int getAnio() { return _Anio; }
 
+        bool operator==(const Fecha& otra) const {
+            return _Dia == otra._Dia && _Mes == otra._Mes && _Anio == otra._Anio;
+        }
+
     protected:
 
     private:

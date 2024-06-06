@@ -38,3 +38,4 @@ void Fecha::Cargar () {
 void Fecha::MostrarNumero () {
     cout << getDia() << "/" << getMes() << "/" << getAnio();
 }
+
