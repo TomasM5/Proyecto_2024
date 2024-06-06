@@ -2,3 +2,11 @@
 Proyecto_2024/Proyecto_2024.layout
 Proyecto_2024.layout
 Proyecto_2024.depend
+obj/Debug/Venta.o
+obj/Debug/Vendedor.o
+obj/Debug/Proveedor.o
+obj/Debug/Persona.o
+obj/Debug/main.o
+obj/Debug/Fecha.o
+obj/Debug/DetalleVenta.o
+obj/Debug/Cliente.o

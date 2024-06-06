@@ -165,6 +165,21 @@ void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un v
     cout << "Ingrese el legajo del vendedor: ";
     cin >> legajo;
 
+    Vendedor vendedor;
+    FILE *archemp= fopen("vendedores.dat", "rb");
+    if (archemp==NULL){
+        cout << "Error al abrir el archivo de vendedores"<< endl;
+        return;
+    }
+    while (fread(&vendedor, sizeof(Vendedor), 1, archemp)){
+        if (vendedor.getLegajo()==legajo){
+            cout << "Vendedor encontrado:" << endl;
+            vendedor.Mostrar();
+            break;
+        }
+    }
+    fclose(archemp);
+
     FILE *file = fopen("ventas.dat", "rb");
     if(file == NULL){
         cout << "Error al abrir el archivo de ventas" << endl;
@@ -174,7 +189,7 @@ void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un v
     Venta venta;
     bool encontrado = false;
     while(fread(&venta, sizeof(Venta), 1, file)){
-        if(venta.getLegajoVendedor() == legajo){
+        if(venta.getIDvendedor() == vendedor.getID()){
             venta.Mostrar();
             cout << endl;
             encontrado = true;

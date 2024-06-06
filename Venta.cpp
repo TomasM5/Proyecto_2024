@@ -146,8 +146,8 @@ void Venta::ventasPorCliente(){///muestra todas las ventas por cliente
     fclose(file);
 }
 
-/**
-REVISAR ESTA FUNCION
+
+//REVISAR ESTA FUNCION
 
 void Venta::ventasPorProducto(){///muestra las ventas por producto
     int idProducto;
@@ -164,7 +164,7 @@ void Venta::ventasPorProducto(){///muestra las ventas por producto
     bool encontrado = false;
 
     while(fread(&detalleventa, sizeof(DetalleVenta), 1, file)){
-        if(detalleventa.getIDproducto == idProducto){
+        if(detalleventa.getIDproducto() == idProducto){
             detalleventa.Mostrar();
             encontrado = true;
         }
@@ -173,5 +173,5 @@ void Venta::ventasPorProducto(){///muestra las ventas por producto
         cout << "No se encontraron ventas para ese producto" << endl;
     }
     fclose(file);
-}**/
+}
 
