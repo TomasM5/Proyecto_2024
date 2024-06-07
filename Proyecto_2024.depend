@@ -44,7 +44,7 @@
 	<cstring>
 	"Fecha.h"
 
-1717642753 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\vendedor.cpp
+1717723796 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\vendedor.cpp
 	<iostream>
 	<cstdio>
 	"DetalleVenta.h"
@@ -65,9 +65,11 @@
 1717651206 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\venta.h
 	"Fecha.h"
 
-1717463909 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\venta.cpp
+1717723796 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\venta.cpp
 	<iostream>
+	<cstdio>
 	"Venta.h"
+	"DetalleVenta.h"
 
 1717465365 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\producto.cpp
 	<iostream>

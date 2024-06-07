@@ -173,7 +173,7 @@ void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un v
     }
     while (fread(&vendedor, sizeof(Vendedor), 1, archemp)){
         if (vendedor.getLegajo()==legajo){
-            cout << "Vendedor encontrado:" << endl;
+            cout << "Vendedor encontrado: " << endl;
             vendedor.Mostrar();
             break;
         }

@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <cstdio>
+#include "Fecha.h"
 
 class Producto{
     public:
@@ -28,6 +29,11 @@ class Producto{
         int getStock(){return _Stock;}
         float getValor(){return _Valor;}
         bool getEstado(){return _Estado;}
+
+        void buscarProductoPorID();
+        void buscarProductoPorCategoria();
+        void buscarProductoPorRangoPrecio();
+        void buscarProductoPorFechaIngreso();
 
 
     protected:

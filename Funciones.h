@@ -164,12 +164,86 @@ void Menu_Inventario(){
     Nombre_Local();
     cout << "           --------    INVENTARIO  -----------" << endl << endl;
     cout << "1 - Mostrar inventario" << endl;
-    cout << "2 - Buscar producto" << endl;
-    cout << "3 - Nuevo producto" << endl;
+    cout << "2 - Productos" << endl; ///WIP -> voy a hacer un submenu de producto.
+    cout << "3 - Nuevo producto" << endl; ///TODO -> unificarlo en la seccion producto?
     cout << "4 - Compra de stock" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
+}
 
+void SubMenuInventario(){
+    int opcion;
+    do {
+        Menu_Inventario();
+        cin >> opcion;
+        switch (opcion) {
+            case 1:
+                mostrarInventario ///TODO
+                break;
+            case 2:
+                SubmenuProductos();
+                break;
+            case 3: {///TODO
+                Producto nuevoProducto;
+                nuevoProducto.Cargar();
+                nuevoProducto.Grabar_Archivo();
+                break;
+            }
+            case 4:
+                ///TODO
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opción invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if (opcion != 0) system("pause");
+    } while (opcion != 0);
+}
+
+void Menu_Productos(){
+    system("cls");
+    Nombre_Local();
+    cout << "           --------    PRODUCTOS  -----------" << endl << endl;
+    cout << "1 - Buscar por ID" << endl;
+    cout << "2 - Buscar por categoria" << endl;
+    cout << "3 - Buscar por rango de precio" << endl;
+    cout << "4 - Buscar por fecha de ingreso" << endl;
+    cout << "0 - Volver al menu de inventario" << endl;
+    cout << endl << endl;
+    cout << "Ingrese la opcion: ";
+}
+
+void SubMenuProductos(){
+    int opcProductos;
+    Producto producto;
+    do {
+        Menu_Productos();
+        cin >> opcProductos;
+        switch (opcProductos) {
+            case 1:
+                producto.buscarProductoPorID();
+                break;
+            case 2:
+                producto.buscarProductoPorCategoria();
+                break;
+            case 3:
+                producto.buscarProductoPorRangoPrecio();
+                break;
+            case 4:
+                producto.buscarProductoPorFechaIngreso();
+                break;
+            case 0:
+                cout << "Volviendo al menu de inventario..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcProductos != 0) system("pause");
+    } while (opcProductos != 0);
 }
 
 void Lista_Inventario(){

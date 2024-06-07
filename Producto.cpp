@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdio>
 #include "Producto.h"
+#include "Fecha.h"
 using namespace std;
 
 
@@ -14,7 +15,7 @@ Producto::Producto() {
     _Estado = true;
 }
 
-void Producto::Cargar() {
+void Producto::Cargar(){
     cout << "Cargar Producto" << endl;
     cout << "ID: ";
     cin >> _ID;
@@ -33,7 +34,7 @@ void Producto::Cargar() {
     cin >> _Estado;
 }
 
-void Producto::Mostrar() {
+void Producto::Mostrar(){
     cout << "Mostrar Producto" << endl;
     cout << "ID: " << _ID << endl;
     cout << "Marca: " << _Marca << endl;
@@ -44,7 +45,7 @@ void Producto::Mostrar() {
     cout << "Estado: " << (_Estado ? "Activo" : "Inactivo") << endl;
 }
 
-void Producto::Grabar_Archivo() {
+void Producto::Grabar_Archivo(){
     FILE *file = fopen("productos.dat", "ab");
     if(file == NULL){
       cout << "Error al abrir el archivo." << endl;
@@ -54,7 +55,7 @@ void Producto::Grabar_Archivo() {
     fclose(file);
 }
 
-void Producto::Leer_Archivo() {
+void Producto::Leer_Archivo(){
     FILE *file = fopen("productos.dat", "rb");
     if(file == NULL){
       cout << "Error al abrir el archivo." << endl;
@@ -65,3 +66,91 @@ void Producto::Leer_Archivo() {
     }
     fclose(file);
 }
+
+void Producto::buscarProductoPorID(){
+    int idProducto;
+    cout << "Ingrese el ID del producto: ";
+    cin >> idProducto;
+
+    FILE *file = fopen("productos.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Producto producto;
+    while(fread(&producto, sizeof(Producto), 1, file)){
+        if(producto.getID() == idProducto){
+            producto.Mostrar();
+            cout << endl;
+            fclose(file);
+            return;
+        }
+    }
+    cout << "Producto no encontrado" << endl;
+    fclose(file);
+}
+
+void Producto::buscarProductoPorCategoria(){
+    int categoria;
+    cout << "Ingrese la categoria del prodcuto: ";
+    cin >> categoria;
+
+    FILE *file = fopen("productos.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Producto producto;
+    while(fread(&producto, sizeof(Producto), 1, file)){
+        if(producto.getCategoria() == categoria){
+            producto.Mostrar();
+            cout << endl;
+        }
+    }
+    fclose(file);
+}
+
+void Producto::buscarProductoPorRangoPrecio(){
+    float precioMin, precioMax;
+    cout << "Ingrese el rango de precio (min y max): ";
+    cin >> precioMin >> precioMax;
+
+    FILE *file = fopen("productos.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Producto producto;
+    while(fread(&producto, sizeof(Producto), 1, file)){
+        if(producto.getValor() >= precioMin && producto.getValor() <= precioMax){
+            producto.Mostrar();
+            cout << endl;
+        }
+    }
+    fclose(file);
+}
+
+void Producto::buscarProductoPorFechaIngreso(){
+    Fecha fecha;
+    cout << "Ingrese la fecha de ingreso (dd/mm/yyyy): ";
+    fecha.Cargar();
+
+    FILE *file = fopen("productos.dat", "rb");
+    if(file == NULL){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    Producto producto;
+    while(fread(&producto, sizeof(Producto), 1, file)){
+        if(producto.getFechaIngreso() == fecha){ ///TODO getFechaIngreso
+            producto.Mostrar();
+            cout << endl;
+        }
+    }
+    fclose(file);
+}
+
