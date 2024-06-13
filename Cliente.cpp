@@ -35,23 +35,20 @@ void Cliente::Mostrar() {
     cout << "Banco: " << _Banco << endl;
 }
 
-void Cliente::registrarCliente(){ ///carga un nuevo cliente y lo graba en el archivo
-    Cargar();
-    Grabar_Archivo();
+void registrarCliente(Cliente reg, ArchivoClientes file){ ///carga un nuevo cliente y lo graba en el archivo
+    reg.Cargar();
+    file.Grabar_Registro(reg);
     cout << "Cliente registrado exitosamente" << endl;
 }
 
-void Cliente::listarClientes(){ ///muestra todos los clientes registrados
-    FILE *file = fopen("clientes.dat", "rb");
-    if(file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
+void listarClientes(ArchivoClientes file){ ///muestra todos los clientes registrados
+    Cliente aux;
+    int i=0;
+    while(aux=file.Leer_Registro(i)){ //    FIX
+        aux.Mostrar();
+        cout << endl;
+        i++;
     }
-
-    while(fread(this, sizeof(Cliente), 1, file)){
-        Mostrar();
-    }
-    fclose(file);
 }
 
 void Cliente::buscarClientePorID(int id){ ///busca y muestra un cliente por su ID
@@ -106,24 +103,36 @@ void Cliente::buscarClientePorNombre(const char* nombre){ ///busca y muestra un 
     fclose(file);
 }
 
-void Cliente::Grabar_Archivo(){
-    FILE *file = fopen("clientes.dat", "ab");
-    if(file == NULL){
-      cout << "Error al abrir el archivo" << endl;
-      return;
-    }
-    fwrite(this, sizeof(Cliente), 1, file);
+int ArchivoClientes::Contar_Registro() {
+    FILE *file=fopen(nombre, "rb");
+    if (file==NULL) {return -1;}
+    fseek(file, 0, 2);
+    int tam=ftell(file);
     fclose(file);
+    return tam/sizeof(Cliente);
 }
 
-void Cliente::Leer_Archivo(){
-    FILE *file = fopen("clientes.dat", "rb");
-    if(file == NULL){
-      cout << "Error al abrir el archivo" << endl;
-      return;
+Producto ArchivoClientes::Leer_Registro(int pos){
+    Cliente reg;
+    FILE *file;
+    file=fopen(nombre, "rb");
+    if(file==NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return reg;
     }
-    while(fread(this, sizeof(Cliente), 1, file)){
-        Mostrar();
-    }
+    fseek(file, sizeof reg*pos,0);
+    fread(&reg, sizeof reg,1, file);
     fclose(file);
+    return reg;
+}
+
+bool ArchivoClientes::Grabar_Registro(Cliente reg){
+    FILE *file = fopen(nombre, "ab");
+    if(file == NULL){
+      cout << "Error al abrir el archivo." << endl;
+      return false;
+    }
+    int grabado=fwrite(&reg, sizeof(reg), 1, file);
+    fclose(file);
+    return grabado;
 }

@@ -45,27 +45,40 @@ void Producto::Mostrar(){
     cout << "Estado: " << (_Estado ? "Activo" : "Inactivo") << endl;
 }
 
-void Producto::Grabar_Archivo(){
-    FILE *file = fopen("productos.dat", "ab");
-    if(file == NULL){
-      cout << "Error al abrir el archivo." << endl;
-      return;
-    }
-    fwrite(this, sizeof(Producto), 1, file);
+int ArchivoProductos::Contar_Registro() {
+    FILE *file=fopen(nombre, "rb");
+    if (file==NULL) {return -1;}
+    fseek(file, 0, 2);
+    int tam=ftell(file);
     fclose(file);
+    return tam/sizeof(Producto);
 }
 
-void Producto::Leer_Archivo(){
-    FILE *file = fopen("productos.dat", "rb");
+Producto ArchivoProductos::Leer_Registro(int pos){
+    Producto reg;
+    FILE *file;
+    file=fopen(nombre, "rb");
+    if(file==NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return reg;
+    }
+    fseek(file, sizeof reg*pos,0);
+    fread(&reg, sizeof reg,1, file);
+    fclose(file);
+    return reg;
+}
+
+bool ArchivoProductos::Grabar_Registro(Producto reg){
+    FILE *file = fopen(nombre, "ab");
     if(file == NULL){
       cout << "Error al abrir el archivo." << endl;
-      return;
+      return false;
     }
-    while(fread(this, sizeof(Producto), 1, file)){
-        Mostrar();
-    }
+    int grabado=fwrite(&reg, sizeof(reg), 1, file);
     fclose(file);
+    return grabado;
 }
+
 
 void Producto::buscarProductoPorID(){
     int idProducto;

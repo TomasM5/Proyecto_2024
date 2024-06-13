@@ -11,9 +11,6 @@ class Cliente : public Persona{
 
         void Cargar();
         void Mostrar();
-        void Grabar_Archivo();
-        void Leer_Archivo();
-
         void setDomicilio(const char* val) { strcpy(_Domicilio, val); }
         void setCorreo(const char* val) { strcpy(_Email, val); }
         void setTelefono(const char* val) { strcpy(_Telefono, val); }
@@ -24,8 +21,8 @@ class Cliente : public Persona{
         const char* getTelefono() { return _Telefono; }
         int getBanco() { return _Banco; }
 
-        void registrarCliente();
-        void listarClientes();
+        //void registrarCliente(); SE EJECUTA FUERA DE LA CLASE
+        //void listarClientes();
         void buscarClientePorID(int id);
         void buscarClientePorDNI(int dni);
         void buscarClientePorNombre(const char* nombre);
@@ -37,6 +34,18 @@ class Cliente : public Persona{
         char _Email[50];
         char _Telefono[15];
         int _Banco;
+};
+
+class ArchivoClientes{
+    private:
+        char nombre[30];
+    public:
+        ArchivoClientes(const char *n){strcpy(nombre, n);};
+
+        Cliente Leer_Registro(int pos);
+        int Contar_Registro ();
+        bool Grabar_Registro(Cliente reg);
+
 };
 
 #endif // CLIENTE_H_INCLUDED

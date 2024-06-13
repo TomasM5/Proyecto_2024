@@ -185,8 +185,10 @@ void SubMenuInventario(){
                 break;
             case 3: {///TODO
                 Producto nuevoProducto;
+                ArchivoProductos fileprod;
                 nuevoProducto.Cargar();
-                nuevoProducto.Grabar_Archivo();
+                fileprod.Grabar_Registro(nuevoProducto);
+
                 break;
             }
             case 4:

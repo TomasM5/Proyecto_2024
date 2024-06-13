@@ -11,8 +11,6 @@ class Producto{
 
         void Cargar();
         void Mostrar();
-        void Grabar_Archivo();
-        void Leer_Archivo();
 
         void setID(int val){ _ID = val;}
         void setMarca(const char *val){ strcpy(_Marca, val);}
@@ -46,6 +44,18 @@ class Producto{
         int _Stock;
         float _Valor;
         bool _Estado;
+
+};
+
+class ArchivoProductos {
+    private:
+        char nombre[30];
+    public:
+        ArchivoProductos (const char *n){strcpy(nombre, n);};
+
+        Producto Leer_Registro(int pos);
+        int Contar_Registro ();
+        bool Grabar_Registro(Producto reg);
 
 };
 

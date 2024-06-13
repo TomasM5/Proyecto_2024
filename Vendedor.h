@@ -12,8 +12,6 @@ class Vendedor : public Persona {
         void Mostrar();
         void calcularComision();
         void salarioTotal();
-        void Grabar_Archivo();
-        void Leer_Archivo();
 
         void setLegajo(int val) { _Legajo = val; }
         void setSalarioBase(float val) { _SalarioBase = val; }
@@ -28,8 +26,8 @@ class Vendedor : public Persona {
         Fecha getIngreso() { return _Ingreso; }
         int getEstado() { return _Estado; }
 
-        void registrarVendedor();
-        void listarVendedores();
+        //void registrarVendedor(ArchivoVendedores arch); SE EJECUTA FUERA DE LA CLASE
+        //void listarVendedores();
         void buscarVendedor();
         void calcularSalarios();
         void ventasPorVendedor();
@@ -43,6 +41,18 @@ class Vendedor : public Persona {
         float _Comision;
         Fecha _Ingreso;
         int _Estado;
+};
+
+class ArchivoVendedores{
+    private:
+        char nombre[30];
+    public:
+        ArchivoVendedores(const char *n){strcpy(nombre, n);};
+
+        Vendedor Leer_Registro(int pos);
+        int Contar_Registro ();
+        bool Grabar_Registro(Vendedor reg);
+
 };
 
 #endif // VENDEDOR_H

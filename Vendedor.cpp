@@ -67,51 +67,55 @@ void Vendedor::salarioTotal(){
     // agregar webadas como obra social y aportes?
 }
 
-void Vendedor::Grabar_Archivo(){
-    FILE *file = fopen("vendedores.dat", "ab");
+int ArchivoVendedores::Contar_Registro() {
+    FILE *p = fopen (nombre, "rb");
+    if (p==NULL) {return -1;}
+    fseek (p, 0, 2);
+    int tam=ftell(p);
+    return tam/sizeof (Vendedor);
+}
+
+bool ArchivoVendedores::Grabar_Registro(Vendedor reg){
+    FILE *file = fopen(nombre, "ab");
 
     if(file == NULL){
       cout << "Error al abrir el archivo" << endl;
-      return;
+      return false;
     }
 
-    fwrite(this, sizeof(Vendedor), 1, file);
+    int grabado=fwrite(&reg, sizeof(reg), 1, file);
     fclose(file);
+    return grabado;
 }
 
-void Vendedor::Leer_Archivo(){
-    FILE *file = fopen("vendedores.dat", "rb");
-
-    if (file==NULL) {
-        cout << "Error al abrir el archivo." << endl;
-        return;
-    }
-
-    while(fread(this, sizeof(Vendedor), 1, file)){
-        Mostrar();
-    }
-    fclose(file);
+Vendedor ArchivoVendedores::Leer_Registro(int pos){
+    Vendedor reg;
+        FILE *p;
+        p=fopen(nombre, "rb");
+        if(p==NULL) {
+            cout << "Error al abrir el archivo." << endl;
+            return reg;
+        }
+        fseek(p, sizeof reg*pos,0);
+        fread(&reg, sizeof reg,1, p);
+        fclose(p);
+        return reg;
 }
 
-void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
-    Cargar();
-    Grabar_Archivo();
+void registrarVendedor(Vendedor reg, ArchivoVendedores arch){ ///carga un nuevo vendedor y lo guarda en el archivo
+    reg.Cargar();
+    arch.Grabar_Registro(reg);
     cout << "Vendedor registrado correctamente" << endl;
-}
+}   //  al sacar las funciones de archivo de la clase Vendedor no pude usarlas dentro de la clase -T
 
-void Vendedor::listarVendedores(){ ///muestra todos los vendedores registrados
-    FILE *file = fopen("vendedores.dat", "rb");
-    if (file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
+void listarVendedores(ArchivoVendedores arch){ ///muestra todos los vendedores registrado
     Vendedor vendedor;
-    while(fread(&vendedor, sizeof(Vendedor), 1, file)){
+    int i=0;
+    while(vendedor=arch.Leer_Registro(i))
         vendedor.Mostrar();
         cout << endl;
+        i++;
     }
-    fclose(file);
 }
 
 void Vendedor::buscarVendedor(){ ///busca y muestra un vendedor por su legajo
