@@ -4,11 +4,12 @@
 	"Headers.h"
 	"Funciones.h"
 
-1717679275 source:d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.cpp
+1718340463 source:d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.cpp
 	<iostream>
+	<ctime>
 	"Fecha.h"
 
-1717679275 d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.h
+1718340463 d:\tomi\onedrive\documentos\github\proyecto-2024\fecha.h
 
 1717679275 source:d:\tomi\onedrive\documentos\github\proyecto-2024\persona.cpp
 	<iostream>
@@ -118,13 +119,13 @@
 	<cstring>
 	<iostream>
 
-1717679275 source:d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.cpp
+1718343460 source:d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.cpp
 	<iostream>
 	<cstdio>
 	<cstring>
 	"Cliente.h"
 
-1718287667 d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.h
+1718339174 d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.h
 	<cstring>
 	<cstdio>
 	"Persona.h"
@@ -140,7 +141,7 @@
 1717682117 d:\tomi\onedrive\documentos\github\proyecto-2024\venta.h
 	"Fecha.h"
 
-1717137506 d:\tomi\onedrive\documentos\github\proyecto-2024\headers.h
+1718340729 d:\tomi\onedrive\documentos\github\proyecto-2024\headers.h
 	"Fecha.h"
 	"Persona.h"
 	"Vendedor.h"
@@ -158,9 +159,10 @@
 	<cstdio>
 	"Fecha.h"
 
-1718285618 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
+1718340696 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
 	<cstring>
 	<iostream>
+	"Headers.h"
 
 1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
 	<iostream>

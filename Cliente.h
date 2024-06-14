@@ -15,11 +15,13 @@ class Cliente : public Persona{
         void setCorreo(const char* val) { strcpy(_Email, val); }
         void setTelefono(const char* val) { strcpy(_Telefono, val); }
         void setBanco(int val) { _Banco = val; }
+        void setEstado(bool val) { _Estado= val; }
 
         const char* getDomicilio() { return _Domicilio; }
         const char* getCorreo() { return _Email; }
         const char* getTelefono() { return _Telefono; }
         int getBanco() { return _Banco; }
+        bool getEstado() { return _Estado; }
 
         //void registrarCliente(); SE EJECUTA FUERA DE LA CLASE
         //void listarClientes();
@@ -34,6 +36,7 @@ class Cliente : public Persona{
         char _Email[50];
         char _Telefono[15];
         int _Banco;
+        bool _Estado;
 };
 
 class ArchivoClientes{

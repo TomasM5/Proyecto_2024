@@ -13,6 +13,7 @@ Producto::Producto() {
     _Stock = 0;
     _Valor = 0.0;
     _Estado = true;
+    _Ingreso(0,0,0);
 }
 
 void Producto::Cargar(){
@@ -32,6 +33,7 @@ void Producto::Cargar(){
     cin >> _Valor;
     cout << "Estado (1 para activo, 0 para inactivo): ";
     cin >> _Estado;
+    _Ingreso.Hoy();
 }
 
 void Producto::Mostrar(){

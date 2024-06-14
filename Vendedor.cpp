@@ -111,7 +111,13 @@ void registrarVendedor(Vendedor reg, ArchivoVendedores arch){ ///carga un nuevo 
 void listarVendedores(ArchivoVendedores arch){ ///muestra todos los vendedores registrado
     Vendedor vendedor;
     int i=0;
-    while(vendedor=arch.Leer_Registro(i))
+    bool fin=false;
+    while(!fin){
+        vendedor=file.Leer_Registro(i);
+        if (vendedor.getEstado()) {
+            fin=true;
+            break;
+        }
         vendedor.Mostrar();
         cout << endl;
         i++;

@@ -9,6 +9,7 @@ class Fecha {
         void Cargar ();
         void MostrarNumero ();
         void MostrarTexto ();
+        Fecha Hoy();
 
         void setDia(int val) { _Dia = val; }
         void setMes(int val) { _Mes = val; }

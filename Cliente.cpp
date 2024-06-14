@@ -10,6 +10,7 @@ Cliente::Cliente(){
     strcpy(_Email, "");
     strcpy(_Telefono, "");
     _Banco = 0;
+    _Estado=false;
 }
 
 void Cliente::Cargar() {
@@ -39,15 +40,22 @@ void registrarCliente(Cliente reg, ArchivoClientes file){ ///carga un nuevo clie
     reg.Cargar();
     file.Grabar_Registro(reg);
     cout << "Cliente registrado exitosamente" << endl;
-}
+}   // ver registrarVendedor
 
 void listarClientes(ArchivoClientes file){ ///muestra todos los clientes registrados
     Cliente aux;
     int i=0;
-    while(aux=file.Leer_Registro(i)){ //    FIX
+    bool fin=false;
+    while(!fin){
+        aux=file.Leer_Registro(i);
+        if (aux.getEstado()) {
+            fin=true;
+            break;
+        }
         aux.Mostrar();
         cout << endl;
         i++;
+
     }
 }
 
@@ -112,7 +120,7 @@ int ArchivoClientes::Contar_Registro() {
     return tam/sizeof(Cliente);
 }
 
-Producto ArchivoClientes::Leer_Registro(int pos){
+Cliente ArchivoClientes::Leer_Registro(int pos){
     Cliente reg;
     FILE *file;
     file=fopen(nombre, "rb");

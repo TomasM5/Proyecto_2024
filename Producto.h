@@ -27,6 +27,7 @@ class Producto{
         int getStock(){return _Stock;}
         float getValor(){return _Valor;}
         bool getEstado(){return _Estado;}
+        Fecha getIngreso(){return _Ingreso;}
 
         void buscarProductoPorID();
         void buscarProductoPorCategoria();
@@ -44,6 +45,7 @@ class Producto{
         int _Stock;
         float _Valor;
         bool _Estado;
+        Fecha _Ingreso;
 
 };
 
