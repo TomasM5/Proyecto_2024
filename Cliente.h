@@ -23,8 +23,8 @@ class Cliente : public Persona{
         int getBanco() { return _Banco; }
         bool getEstado() { return _Estado; }
 
-        //void registrarCliente(); SE EJECUTA FUERA DE LA CLASE
-        //void listarClientes();
+        void registrarCliente();
+        void listarClientes();
         void buscarClientePorID(int id);
         void buscarClientePorDNI(int dni);
         void buscarClientePorNombre(const char* nombre);

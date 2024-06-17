@@ -102,19 +102,23 @@ Vendedor ArchivoVendedores::Leer_Registro(int pos){
         return reg;
 }
 
-void registrarVendedor(Vendedor reg, ArchivoVendedores arch){ ///carga un nuevo vendedor y lo guarda en el archivo
-    reg.Cargar();
-    arch.Grabar_Registro(reg);
+void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
+    ArchivoVendedores arch="vendedores.dat";
+    Vendedor a;
+    Cargar();
+    *a=this;
+    arch.Grabar_Registro(a);
     cout << "Vendedor registrado correctamente" << endl;
-}   //  al sacar las funciones de archivo de la clase Vendedor no pude usarlas dentro de la clase -T
+}
 
-void listarVendedores(ArchivoVendedores arch){ ///muestra todos los vendedores registrado
+void Vendedor::listarVendedores(){ ///muestra todos los vendedores registrado
     Vendedor vendedor;
+    ArchivoVendedores file="vendedores.dat";
     int i=0;
     bool fin=false;
     while(!fin){
         vendedor=file.Leer_Registro(i);
-        if (vendedor.getEstado()) {
+        if (vendedor.getEstado()==0) {
             fin=true;
             break;
         }

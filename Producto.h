@@ -19,6 +19,7 @@ class Producto{
         void setStock(int val){ _Stock  = val;}
         void setValor(float val){ _Valor = val;}
         void setEstado(bool val){ _Estado = val;}
+        void setFechaIngreso (Fecha val){_Ingreso = val;}
 
         int getID(){return _ID;}
         const char *getMarca(){return _Marca;}
@@ -27,8 +28,10 @@ class Producto{
         int getStock(){return _Stock;}
         float getValor(){return _Valor;}
         bool getEstado(){return _Estado;}
-        Fecha getIngreso(){return _Ingreso;}
+        Fecha getFechaIngreso(){return _Ingreso;}
 
+        void registrarProducto();
+        void listarProductos();
         void buscarProductoPorID();
         void buscarProductoPorCategoria();
         void buscarProductoPorRangoPrecio();

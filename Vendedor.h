@@ -26,8 +26,8 @@ class Vendedor : public Persona {
         Fecha getIngreso() { return _Ingreso; }
         int getEstado() { return _Estado; }
 
-        //void registrarVendedor(ArchivoVendedores arch); SE EJECUTA FUERA DE LA CLASE
-        //void listarVendedores();
+        void registrarVendedor();
+        void listarVendedores();
         void buscarVendedor();
         void calcularSalarios();
         void ventasPorVendedor();
@@ -40,7 +40,7 @@ class Vendedor : public Persona {
         float _SalarioTotal;
         float _Comision;
         Fecha _Ingreso;
-        int _Estado;
+        int _Estado; // 0=Invalido; 1=Activo; 2=Inactivo; ¿3=Vacaciones?
 };
 
 class ArchivoVendedores{

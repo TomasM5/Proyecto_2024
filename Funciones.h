@@ -56,6 +56,7 @@ void Menu_Ventas(){
 void SubMenuVentas(){
     int opcVentas;
     Venta venta;
+
     do{
         Menu_Ventas();
         cin >> opcVentas;
@@ -172,23 +173,21 @@ void Menu_Inventario(){
 }
 
 void SubMenuInventario(){
-    int opcion;
+    int opcInv;
+    Producto prod;
     do {
         Menu_Inventario();
-        cin >> opcion;
-        switch (opcion) {
+        cin >> opcInv;
+        switch (opcInv) {
             case 1:
-                mostrarInventario ///TODO
+                prod.listarProductos();
                 break;
-            case 2:
-                SubmenuProductos();
+            case 2: {
+//                SubMenuProductos();
                 break;
-            case 3: {///TODO
-                Producto nuevoProducto;
-                ArchivoProductos fileprod;
-                nuevoProducto.Cargar();
-                fileprod.Grabar_Registro(nuevoProducto);
-
+            }
+            case 3: {
+                prod.registrarProducto();
                 break;
             }
             case 4:
@@ -201,8 +200,8 @@ void SubMenuInventario(){
                 cout << "Opción invalida. Intente nuevamente" << endl;
                 break;
         }
-        if (opcion != 0) system("pause");
-    } while (opcion != 0);
+        if (opcInv != 0) system("pause");
+    } while (opcInv != 0);
 }
 
 void Menu_Productos(){

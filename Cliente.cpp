@@ -25,6 +25,7 @@ void Cliente::Cargar() {
     cin.getline(_Telefono, 15);
     cout << "Banco: ";
     cin >> _Banco;
+    setEstado(true);
 }
 
 void Cliente::Mostrar() {
@@ -36,14 +37,19 @@ void Cliente::Mostrar() {
     cout << "Banco: " << _Banco << endl;
 }
 
-void registrarCliente(Cliente reg, ArchivoClientes file){ ///carga un nuevo cliente y lo graba en el archivo
-    reg.Cargar();
-    file.Grabar_Registro(reg);
+void Cliente::registrarCliente(){///carga un nuevo cliente y lo graba en el archivo
+    ArchivoClientes file="clientes.dat";
+    Cliente *a;
+    Cargar();
+    a=this;
+    file.Grabar_Registro(*a);
     cout << "Cliente registrado exitosamente" << endl;
 }   // ver registrarVendedor
 
-void listarClientes(ArchivoClientes file){ ///muestra todos los clientes registrados
+void Cliente::listarClientes(){ ///muestra todos los clientes registrados
     Cliente aux;
+    ArchivoClientes file="clientes.dat";
+
     int i=0;
     bool fin=false;
     while(!fin){
@@ -60,38 +66,37 @@ void listarClientes(ArchivoClientes file){ ///muestra todos los clientes registr
 }
 
 void Cliente::buscarClientePorID(int id){ ///busca y muestra un cliente por su ID
-    FILE *file = fopen("clientes.dat", "rb");
-    if(file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-    while(fread(this, sizeof(Cliente), 1, file)){
-        if(this->getID() == id) {
-            Mostrar();
-            fclose(file);
+    ArchivoClientes file="clientes.dat";
+    Cliente aux;
+
+    int i=0;
+    do{
+        aux=file.Leer_Registro(i);
+        if(aux.getID() == id){
+            aux.Mostrar();
             return;
         }
-    }
+        i++;
+    }while (aux.getEstado()!=0);
     cout << "Cliente no encontrado" << endl;
-    fclose(file);
+
 }
 
 void Cliente::buscarClientePorDNI(int dni){ ///busca y muestra un cliente por su DNI
-    FILE *file = fopen("clientes.dat", "rb");
-    if(file == NULL) {
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
+    ArchivoClientes file="clientes.dat";
+    Cliente aux;
 
-    while(fread(this, sizeof(Cliente), 1, file)){
-        if(this->getDNI() == dni){
-            Mostrar();
-            fclose(file);
+    int i=0;
+    do{
+        aux=file.Leer_Registro(i);
+        if(aux.getDNI() == dni){
+            aux.Mostrar();
             return;
         }
-    }
+        i++;
+    }while (aux.getEstado()!=0);
     cout << "Cliente no encontrado" << endl;
-    fclose(file);
+
 }
 
 void Cliente::buscarClientePorNombre(const char* nombre){ ///busca y muestra un cliente por su nombre

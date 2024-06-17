@@ -6,6 +6,7 @@ using namespace std;
 
 
 Producto::Producto() {
+    Fecha a(0, 0, 0);
     _ID = 0;
     strcpy(_Marca, "");
     strcpy(_Descripcion, "");
@@ -13,7 +14,7 @@ Producto::Producto() {
     _Stock = 0;
     _Valor = 0.0;
     _Estado = true;
-    _Ingreso(0,0,0);
+    setFechaIngreso(a);
 }
 
 void Producto::Cargar(){
@@ -81,29 +82,53 @@ bool ArchivoProductos::Grabar_Registro(Producto reg){
     return grabado;
 }
 
+void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el archivo
+    ArchivoProductos file="productos.dat";
+    Producto *a;
+    Cargar();
+    a=this;
+    file.Grabar_Registro(*a);
+    cout << "Producto registrado exitosamente" << endl;
+}
+
+void Producto::listarProductos(){ ///muestra todos los productos registrados
+    Producto aux;
+    ArchivoProductos file="productos.dat";
+
+    int i=0;
+    bool fin=false;
+    while(!fin){
+        aux=file.Leer_Registro(i);
+        if (aux.getEstado()) {
+            fin=true;
+            break;
+        }
+        aux.Mostrar();
+        cout << endl;
+        i++;
+
+    }
+}
+
 
 void Producto::buscarProductoPorID(){
     int idProducto;
     cout << "Ingrese el ID del producto: ";
     cin >> idProducto;
 
-    FILE *file = fopen("productos.dat", "rb");
-    if(file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
+    ArchivoProductos file="productos.dat";
     Producto producto;
-    while(fread(&producto, sizeof(Producto), 1, file)){
+    int i=0;
+    do{
+        producto=file.Leer_Registro(i);
         if(producto.getID() == idProducto){
             producto.Mostrar();
             cout << endl;
-            fclose(file);
             return;
         }
-    }
+        i++;
+    }while(producto.getEstado()!=0);
     cout << "Producto no encontrado" << endl;
-    fclose(file);
 }
 
 void Producto::buscarProductoPorCategoria(){
@@ -111,20 +136,18 @@ void Producto::buscarProductoPorCategoria(){
     cout << "Ingrese la categoria del prodcuto: ";
     cin >> categoria;
 
-    FILE *file = fopen("productos.dat", "rb");
-    if(file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
+    ArchivoProductos file="productos.dat";
     Producto producto;
-    while(fread(&producto, sizeof(Producto), 1, file)){
+    int i=0;
+    do{
+        producto=file.Leer_Registro(i);
         if(producto.getCategoria() == categoria){
             producto.Mostrar();
             cout << endl;
+            return;
         }
-    }
-    fclose(file);
+        i++;
+    }while(producto.getEstado()!=0);
 }
 
 void Producto::buscarProductoPorRangoPrecio(){
@@ -132,20 +155,18 @@ void Producto::buscarProductoPorRangoPrecio(){
     cout << "Ingrese el rango de precio (min y max): ";
     cin >> precioMin >> precioMax;
 
-    FILE *file = fopen("productos.dat", "rb");
-    if(file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
+    ArchivoProductos file="productos.dat";
     Producto producto;
-    while(fread(&producto, sizeof(Producto), 1, file)){
+    int i=0;
+    do{
+        producto=file.Leer_Registro(i);
         if(producto.getValor() >= precioMin && producto.getValor() <= precioMax){
             producto.Mostrar();
             cout << endl;
+            return;
         }
-    }
-    fclose(file);
+        i++;
+    }while(producto.getEstado()!=0);
 }
 
 void Producto::buscarProductoPorFechaIngreso(){

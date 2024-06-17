@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1717679275 source:d:\tomi\onedrive\documentos\github\proyecto-2024\main.cpp
+1718342097 source:d:\tomi\onedrive\documentos\github\proyecto-2024\main.cpp
 	<iostream>
 	"Headers.h"
 	"Funciones.h"
@@ -20,13 +20,13 @@
 	<cstring>
 	"Fecha.h"
 
-1717682143 source:d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.cpp
+1718341237 source:d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.cpp
 	<iostream>
 	<cstdio>
 	"DetalleVenta.h"
 	"Vendedor.h"
 
-1718285365 d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.h
+1718575096 d:\tomi\onedrive\documentos\github\proyecto-2024\vendedor.h
 	"Persona.h"
 	"Fecha.h"
 
@@ -119,13 +119,13 @@
 	<cstring>
 	<iostream>
 
-1718343460 source:d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.cpp
+1718576332 source:d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.cpp
 	<iostream>
 	<cstdio>
 	<cstring>
 	"Cliente.h"
 
-1718339174 d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.h
+1718573738 d:\tomi\onedrive\documentos\github\proyecto-2024\cliente.h
 	<cstring>
 	<cstdio>
 	"Persona.h"
@@ -154,20 +154,20 @@
 1717679275 d:\tomi\onedrive\documentos\github\proyecto-2024\proveedor.h
 	"Persona.h"
 
-1718285010 d:\tomi\onedrive\documentos\github\proyecto-2024\producto.h
+1718585467 d:\tomi\onedrive\documentos\github\proyecto-2024\producto.h
 	<cstring>
 	<cstdio>
 	"Fecha.h"
 
-1718340696 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
+1718585518 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
 	<cstring>
 	<iostream>
-	"Headers.h"
 
-1717469736 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
+1718343171 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
 	<iostream>
 	<cstdio>
 	"Producto.h"
+	"Fecha.h"
 
 1717679275 source:d:\tomi\onedrive\documentos\github\proyecto-2024\proveedor.cpp
 	<iostream>
