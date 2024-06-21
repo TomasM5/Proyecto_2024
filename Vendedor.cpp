@@ -104,10 +104,10 @@ Vendedor ArchivoVendedores::Leer_Registro(int pos){
 
 void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
     ArchivoVendedores arch="vendedores.dat";
-    Vendedor a;
+    Vendedor *a;
     Cargar();
-    *a=this;
-    arch.Grabar_Registro(a);
+    a=this;
+    arch.Grabar_Registro(*a);
     cout << "Vendedor registrado correctamente" << endl;
 }
 

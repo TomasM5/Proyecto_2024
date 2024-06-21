@@ -1,6 +1,7 @@
 #ifndef VENTA_H_INCLUDED
 #define VENTA_H_INCLUDED
 
+#include<cstring>
 #include "Fecha.h"
 
 class Venta{
@@ -38,6 +39,19 @@ private:
     int _IDcliente;
     int _FormaPago;
     bool _Envio;
+};
+
+
+class ArchivoVentas{
+    private:
+        char nombre[30];
+    public:
+        ArchivoVentas(const char *n){strcpy(nombre, n);};
+
+        Venta Leer_Registro(int pos);
+        int Contar_Registro ();
+        bool Grabar_Registro(Venta reg);
+
 };
 
 #endif // VENTA_H_INCLUDED

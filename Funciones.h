@@ -172,38 +172,6 @@ void Menu_Inventario(){
     cout << "Ingrese la opcion: ";
 }
 
-void SubMenuInventario(){
-    int opcInv;
-    Producto prod;
-    do {
-        Menu_Inventario();
-        cin >> opcInv;
-        switch (opcInv) {
-            case 1:
-                prod.listarProductos();
-                break;
-            case 2: {
-//                SubMenuProductos();
-                break;
-            }
-            case 3: {
-                prod.registrarProducto();
-                break;
-            }
-            case 4:
-                ///TODO
-                break;
-            case 0:
-                cout << "Volviendo al menu principal..." << endl;
-                return;
-            default:
-                cout << "Opción invalida. Intente nuevamente" << endl;
-                break;
-        }
-        if (opcInv != 0) system("pause");
-    } while (opcInv != 0);
-}
-
 void Menu_Productos(){
     system("cls");
     Nombre_Local();
@@ -245,6 +213,38 @@ void SubMenuProductos(){
         }
         if(opcProductos != 0) system("pause");
     } while (opcProductos != 0);
+}
+
+void SubMenuInventario(){
+    int opcInv;
+    Producto prod;
+    do {
+        Menu_Inventario();
+        cin >> opcInv;
+        switch (opcInv) {
+            case 1:
+                prod.listarProductos();
+                break;
+            case 2: {
+                SubMenuProductos();
+                break;
+            }
+            case 3: {
+                prod.registrarProducto();
+                break;
+            }
+            case 4:
+                ///TODO
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opción invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if (opcInv != 0) system("pause");
+    } while (opcInv != 0);
 }
 
 void Lista_Inventario(){
@@ -338,7 +338,7 @@ void SubmenuProveedores(){
                 proveedor.buscarProveedor();
                 break;
             case 4:
-                proveedor.comprasPorProveedor();
+0                proveedor.comprasPorProveedor();
                 break;
             case 0:
                 cout << "Volviendo al menu principal..." << endl;

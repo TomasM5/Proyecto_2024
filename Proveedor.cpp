@@ -36,16 +36,19 @@ void Proveedor::registrarProveedor(){ ///carga un nuevo proveedor y lo registra 
 }
 
 void Proveedor::listarProveedores(){///muestra todos los proveedores registrados
-    FILE *file = fopen("proveedores.dat", "ab");
+    FILE *file = fopen("proveedores.dat", "rb");
     if(file == NULL) {
         cout << "Error al abrir el archivo" << endl;
         return;
     }
 
     Proveedor proveedor;
+    int i=0;
     while(fread(&proveedor, sizeof(Proveedor), 1, file)){
         proveedor.Mostrar();
         cout << endl;
+        fseek(file, sizeof(Proveedor)*i,0);
+        i++;
     }
     fclose(file);
 }
