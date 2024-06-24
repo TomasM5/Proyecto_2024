@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdio>
 #include "Proveedor.h"
+#include "Compra.h"
 using namespace std;
 
 
@@ -76,9 +77,6 @@ void Proveedor::buscarProveedor(){///busca y muestra un proveedor por su ID
     fclose(file);
 }
 
-/**
-hay que implementar una nueva clase llamada Compras
-
 void Proveedor::comprasPorProveedor(){
     int id;
     cout << "Ingrese el ID del proveedor: ";
@@ -103,4 +101,3 @@ void Proveedor::comprasPorProveedor(){
     }
     fclose(file);
 }
-**/

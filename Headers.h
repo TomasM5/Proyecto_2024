@@ -10,6 +10,7 @@
 #include "Producto.h"
 #include "Venta.h"
 #include "DetalleVenta.h"
+#include "Compra.h"
 
 
 #endif // HEADERS_H_INCLUDED

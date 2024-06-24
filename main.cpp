@@ -19,7 +19,7 @@ int main() {
                 SubMenuClientes();
                 break;
             case 3:
-                Menu_Inventario();
+                SubMenuInventario();
                 system("pause");
                 break;
             case 4:
@@ -31,7 +31,7 @@ int main() {
                 system("pause");
                 break;
             case 6:
-                Menu_Configuracion();
+                SubmenuConfiguraciones();
                 system("pause");
                 break;
             case 0:

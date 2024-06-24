@@ -83,7 +83,7 @@ bool ArchivoProductos::Grabar_Registro(Producto reg){
 }
 
 void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el archivo
-    ArchivoProductos file="productos.dat";
+    ArchivoProductos file("productos.dat");
     Producto *a;
     Cargar();
     a=this;
@@ -93,7 +93,7 @@ void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el a
 
 void Producto::listarProductos(){ ///muestra todos los productos registrados
     Producto aux;
-    ArchivoProductos file="productos.dat";
+    ArchivoProductos file("productos.dat");
 
     int i=0;
     bool fin=false;

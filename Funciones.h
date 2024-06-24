@@ -9,6 +9,7 @@ using namespace std;
 void Nombre_Local(){
     cout << "           --------    DECORACIONES LUZ TORMENTOSA   ------" << endl << endl;
 }
+
 void Menu_Principal(){
     system("cls");
     Nombre_Local();
@@ -165,8 +166,8 @@ void Menu_Inventario(){
     Nombre_Local();
     cout << "           --------    INVENTARIO  -----------" << endl << endl;
     cout << "1 - Mostrar inventario" << endl;
-    cout << "2 - Productos" << endl; ///WIP -> voy a hacer un submenu de producto.
-    cout << "3 - Nuevo producto" << endl; ///TODO -> unificarlo en la seccion producto?
+    cout << "2 - Menu productos" << endl;
+    cout << "3 - Anadir nuevo producto" << endl;
     cout << "4 - Compra de stock" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
@@ -218,6 +219,7 @@ void SubMenuProductos(){
 void SubMenuInventario(){
     int opcInv;
     Producto prod;
+    Compra compra;
     do {
         Menu_Inventario();
         cin >> opcInv;
@@ -225,16 +227,15 @@ void SubMenuInventario(){
             case 1:
                 prod.listarProductos();
                 break;
-            case 2: {
+            case 2:
                 SubMenuProductos();
                 break;
-            }
-            case 3: {
+            case 3:
                 prod.registrarProducto();
                 break;
-            }
             case 4:
-                ///TODO
+                compra.Cargar();
+                ///TODO -> guardar compra en archivo
                 break;
             case 0:
                 cout << "Volviendo al menu principal..." << endl;
@@ -338,7 +339,7 @@ void SubmenuProveedores(){
                 proveedor.buscarProveedor();
                 break;
             case 4:
-0                proveedor.comprasPorProveedor();
+                proveedor.comprasPorProveedor();
                 break;
             case 0:
                 cout << "Volviendo al menu principal..." << endl;
@@ -376,6 +377,8 @@ void Menu_Configuracion(){
 }
 
 void Menu_Copia_Seguridad(){
+    system("cls");
+    Nombre_Local();
     cout << "REALIZAR COPIA DE SEGURIDAD" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;
@@ -390,6 +393,8 @@ void Menu_Copia_Seguridad(){
 }
 
 void Menu_Restaurar_Copia(){
+    system("cls");
+    Nombre_Local();
     cout << "RESTAURAR COPIA DE SEGURIDAD" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;
@@ -404,6 +409,8 @@ void Menu_Restaurar_Copia(){
 }
 
 void Menu_Exportar(){
+    system("cls");
+    Nombre_Local();
     cout << "EXPORTAR ARCHIVOS CSV" << endl;
     cout << "-------------------------------------" << endl;
     cout << "1 - PRODUCTOS" << endl;
@@ -416,5 +423,137 @@ void Menu_Exportar(){
     cout << "0 - SALIR" << endl;
     cout << "OPCION: ";
 }
+
+void SubmenuConfiguraciones(){
+    int opcConfiguracion;
+    do{
+        Menu_Configuracion();
+        cin >> opcConfiguracion;
+        switch (opcConfiguracion){
+            case 1:
+                Menu_Copia_Seguridad();
+                break;
+            case 2:
+                Menu_Restaurar_Copia();
+                break;
+            case 3:
+                Menu_Exportar();
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcConfiguracion != 0) system("pause");
+    }while(opcConfiguracion != 0);
+}
+
+void SubMenu_Copia_Seguridad(){
+    int opcConfig;
+    do{
+        Menu_Copia_Seguridad();
+        cin >> opcConfig;
+        switch (opcConfig){
+            case 1:
+                ///COPIA SEGURIDAD PRODUCTO
+                break;
+            case 2:
+                ///COPIA SEGURIDAD CLIENTE
+                break;
+            case 3:
+                ///COPIA SEGURIDAD PROVEEDORES
+                break;
+            case 4:
+                ///COPIA SEGURIDAD VENTAS
+                break;
+            case 5:
+                ///COPIA SEGURIDAD CATEGORIA
+                break;
+            case 6:
+                ///COPIA SEGURIDAD TODO
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcConfig != 0) system("pause");
+    }while(opcConfig != 0);
+}
+
+void SubMenu_Restaruar_copia(){
+    int opcConfig;
+    do{
+        Menu_Restaurar_Copia();
+        cin >> opcConfig;
+        switch (opcConfig){
+            case 1:
+                ///RESTAURAR COPIA PRODUCTO
+                break;
+            case 2:
+                ///RESTAURAR COPIA CLIENTE
+                break;
+            case 3:
+                ///RESTAURAR COPIA PROVEEDORES
+                break;
+            case 4:
+                ///RESTAURAR COPIA VENTAS
+                break;
+            case 5:
+                ///RESTAURAR COPIA CATEGORIA
+                break;
+            case 6:
+                ///RESTAURAR COPIA TODO
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcConfig != 0) system("pause");
+    }while(opcConfig != 0);
+}
+
+void SubMenu_Exportar(){
+    int opcConfig;
+    do{
+        Menu_Exportar();
+        cin >> opcConfig;
+        switch (opcConfig){
+            case 1:
+                ///EXPORTAR PRODUCTO
+                break;
+            case 2:
+                ///EXPORTAR CLIENTE
+                break;
+            case 3:
+                ///EXPORTAR PROVEEDORES
+                break;
+            case 4:
+                ///EXPORTAR VENTAS
+                break;
+            case 5:
+                ///EXPORTAR CATEGORIA
+                break;
+            case 6:
+                ///EXPORTAR TODO
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcConfig != 0) system("pause");
+    }while(opcConfig != 0);
+}
+
 
 #endif // FUNCIONES_H_INCLUDED
