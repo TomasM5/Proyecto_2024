@@ -11,8 +11,6 @@ public:
     void Mostrar();
     float MontoFinal();
     float CalcularDescuento();
-    void Grabar_Archivo();
-    void Leer_Archivo();
 
     void setVenta(Venta val) { _Venta = val; }
     void setIDproducto(int val) { _IDproducto = val; }
@@ -20,6 +18,7 @@ public:
     void setMonto(float val) { _Monto = val; }
     void setDescuento(float val) { _Descuento = val; }
 
+    int getIDVenta();
     Venta getVenta() { return _Venta; }
     int getIDproducto() { return _IDproducto; }
     int getCantidad() { return _Cantidad; }
@@ -34,6 +33,18 @@ private:
     int _Cantidad;
     float _Monto;
     float _Descuento;
+};
+
+class ArchivoDetalle{
+    private:
+        char nombre[30];
+    public:
+        ArchivoDetalle(const char *n){strcpy(nombre, n);};
+
+        DetalleVenta Leer_Registro(int pos);
+        int Contar_Registro ();
+        bool Grabar_Registro(DetalleVenta reg);
+
 };
 
 #endif // DETALLEVENTA_H_INCLUDED

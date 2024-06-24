@@ -13,7 +13,7 @@ Producto::Producto() {
     _Categoria = 0;
     _Stock = 0;
     _Valor = 0.0;
-    _Estado = true;
+    _Estado = false;
     setFechaIngreso(a);
 }
 
@@ -32,8 +32,9 @@ void Producto::Cargar(){
     cin >> _Stock;
     cout << "Valor: ";
     cin >> _Valor;
-    cout << "Estado (1 para activo, 0 para inactivo): ";
-    cin >> _Estado;
+//    cout << "Estado (1 para activo, 0 para inactivo): ";
+//    cin >> _Estado;
+    setEstado(1);
     _Ingreso.Hoy();
 }
 
@@ -99,7 +100,7 @@ void Producto::listarProductos(){ ///muestra todos los productos registrados
     bool fin=false;
     while(!fin){
         aux=file.Leer_Registro(i);
-        if (aux.getEstado()) {
+        if (aux.getEstado()==0) {
             fin=true;
             break;
         }

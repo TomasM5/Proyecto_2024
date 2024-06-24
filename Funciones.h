@@ -48,6 +48,7 @@ void Menu_Ventas(){
     cout << "3 - Buscar venta por ID" << endl;
     cout << "4 - Ventas por cliente" << endl;
     cout << "5 - Ventas por producto" << endl;
+    cout << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
@@ -97,7 +98,8 @@ void Menu_Clientes(){
     cout << "3 - Buscar cliente" << endl;
     cout << "4 - Buscar DNI" << endl; // consulta de cliente por dni
     cout << "5 - Buscar nombre" << endl;
-    cout << "6 - Volver al menu principal" << endl;
+    cout << endl;
+    cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
     //consulta por tipo de consumidor?
@@ -169,6 +171,8 @@ void Menu_Inventario(){
     cout << "2 - Menu productos" << endl;
     cout << "3 - Anadir nuevo producto" << endl;
     cout << "4 - Compra de stock" << endl;
+    cout << endl;
+    cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
 }
@@ -181,6 +185,7 @@ void Menu_Productos(){
     cout << "2 - Buscar por categoria" << endl;
     cout << "3 - Buscar por rango de precio" << endl;
     cout << "4 - Buscar por fecha de ingreso" << endl;
+    cout << endl;
     cout << "0 - Volver al menu de inventario" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";

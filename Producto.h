@@ -45,6 +45,17 @@ class Producto{
         char _Marca[20];
         char _Descripcion[50];
         int _Categoria;
+        /* CODIGOS DE CATEGORIAS
+        1 - Muebles
+        2 - Iluminacion
+        3 - Cuadros
+        4 - Textiles
+        5 - Plantas artificiales
+        6 - Ceramicas
+        7 -
+        8 -
+        9 -
+        */
         int _Stock;
         float _Valor;
         bool _Estado;

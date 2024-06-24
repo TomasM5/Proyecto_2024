@@ -36,6 +36,13 @@ class Cliente : public Persona{
         char _Email[50];
         char _Telefono[15];
         int _Banco;
+        /* BANCOS
+        1 - Galicia
+        2 - BBVA
+        3 - ICBC
+        4 - Santander
+        5 - Macro
+        */
         bool _Estado;
 };
 

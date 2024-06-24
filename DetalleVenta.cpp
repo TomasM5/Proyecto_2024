@@ -12,6 +12,7 @@ DetalleVenta::DetalleVenta() {
 
 void DetalleVenta::Cargar() {
     cout << "Cargar Detalle de Venta" << endl;
+    _Venta.Cargar();
     cout << "ID Producto: ";
     cin >> _IDproducto;
     cout << "Cantidad: ";
@@ -23,7 +24,8 @@ void DetalleVenta::Cargar() {
 }
 
 void DetalleVenta::Mostrar() {
-    cout << "Mostrar Detalle de Venta\n";
+//    cout << "Mostrar Detalle de Venta\n";
+    _Venta.Mostrar();
     cout << "ID Producto: " << _IDproducto << endl;
     cout << "Cantidad: " << _Cantidad << endl;
     cout << "Monto: " << _Monto << endl;
@@ -38,24 +40,45 @@ float DetalleVenta::CalcularDescuento() {
     return _Monto * (_Descuento / 100);
 }
 
-void DetalleVenta::Grabar_Archivo() {
-    FILE *file = fopen("detalle_venta.dat", "ab");
-    if(file == NULL){
-      cout << "Error al abrir el archivo." << endl;
-      return;
-    }
-    fwrite(this, sizeof(DetalleVenta), 1, file);
-    fclose(file);
+int DetalleVenta::getIDVenta () {
+    Venta aux;
+    int id;
+    aux=getVenta();
+    id=aux.getID();
+
+    return id;
 }
 
-void DetalleVenta::Leer_Archivo() {
-    FILE *file = fopen("detalle_venta.dat", "rb");
+bool ArchivoDetalle::Grabar_Registro(DetalleVenta reg) {
+    FILE *file = fopen(nombre, "ab");
     if(file == NULL){
       cout << "Error al abrir el archivo." << endl;
-      return;
+      return 0;
     }
-    while(fread(this, sizeof(DetalleVenta), 1, file)){
-        Mostrar();
-    }
+    int grabado=fwrite(&reg, sizeof(reg), 1, file);
     fclose(file);
+    return grabado;
+}
+
+DetalleVenta ArchivoDetalle::Leer_Registro(int pos) {
+    DetalleVenta reg;
+    FILE *file;
+    file=fopen(nombre, "rb");
+    if(file==NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return reg;
+    }
+    fseek(file, sizeof reg*pos,0);
+    fread(&reg, sizeof reg,1, file);
+    fclose(file);
+    return reg;
+}
+
+int ArchivoDetalle::Contar_Registro() {
+    FILE *file=fopen(nombre, "rb");
+    if (file==NULL) {return -1;}
+    fseek(file, 0, 2);
+    int tam=ftell(file);
+    fclose(file);
+    return tam/sizeof(DetalleVenta);
 }

@@ -25,6 +25,11 @@ class Persona
 
     protected:
         int _ID;
+        /* CODIGOS ID
+        1000 - Vendedores
+        2000 - Clientes
+        3000 - Proveedores
+        */
         char _Nombre[20];
         char _Apellido[20];
         Fecha _Nacimiento;
