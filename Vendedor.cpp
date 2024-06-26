@@ -44,6 +44,7 @@ void Vendedor::Mostrar(){
     cout << "Salario Base: " << getSalarioBase() << endl;
     cout << "Comisiones acumuladas: " << getComision() << endl;
     cout << "Salario total: " << getSalarioTotal();
+    cout << endl;
 
 }
 

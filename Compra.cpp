@@ -33,6 +33,7 @@ void Compra::Cargar() {
         if (prod.getID()==_ProductoID){
             encontrado=true;
             int stock=prod.getStock() + _Cantidad;
+            if(prod.getEstado()==0) prod.setEstado(1);
             prod.setStock(stock);
 
             tam=sizeof(Producto) * (i-1); //    para grabar sobre el elemento encontrado ¿tiene que ir en la misma posicion o antes? -T

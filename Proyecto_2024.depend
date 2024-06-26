@@ -166,11 +166,11 @@
 	<cstdio>
 	"Fecha.h"
 
-1719257808 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
+1719434794 d:\tomi\onedrive\documentos\github\proyecto-2024\funciones.h
 	<cstring>
 	<iostream>
 
-1719252596 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
+1719435057 source:d:\tomi\onedrive\documentos\github\proyecto-2024\producto.cpp
 	<iostream>
 	<cstdio>
 	"Producto.h"
@@ -182,7 +182,7 @@
 	"Proveedor.h"
 	"Compra.h"
 
-1719262627 source:d:\tomi\onedrive\documentos\github\proyecto-2024\venta.cpp
+1719435641 source:d:\tomi\onedrive\documentos\github\proyecto-2024\venta.cpp
 	<iostream>
 	<cstdio>
 	"Venta.h"
@@ -198,7 +198,7 @@
 1719191608 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\compra.h
 	"Fecha.h"
 
-1719265343 source:d:\tomi\onedrive\documentos\github\proyecto-2024\compra.cpp
+1719435622 source:d:\tomi\onedrive\documentos\github\proyecto-2024\compra.cpp
 	<iostream>
 	<cstring>
 	"Compra.h"

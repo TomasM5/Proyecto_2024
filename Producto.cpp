@@ -85,10 +85,9 @@ bool ArchivoProductos::Grabar_Registro(Producto reg){
 
 void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el archivo
     ArchivoProductos file("productos.dat");
-    Producto *a;
-    Cargar();
-    a=this;
-    file.Grabar_Registro(*a);
+    Producto a;
+    a.Cargar();
+    file.Grabar_Registro(a);
     cout << "Producto registrado exitosamente" << endl;
 }
 
@@ -134,7 +133,15 @@ void Producto::buscarProductoPorID(){
 
 void Producto::buscarProductoPorCategoria(){
     int categoria;
-    cout << "Ingrese la categoria del prodcuto: ";
+    cout << "Categorias existentes:" << endl;
+    cout << "1 - Muebles" << endl;
+    cout << "2 - Iluminacion" << endl;
+    cout << "3 - Cuadros" << endl;
+    cout << "4 - Textiles" << endl;
+    cout << "5 - Plantas artificiales" << endl;
+    cout << "6 - Ceramicas" << endl;
+    cout << endl;
+    cout << "Ingrese la categoria del producto a buscar: ";
     cin >> categoria;
 
     ArchivoProductos file="productos.dat";

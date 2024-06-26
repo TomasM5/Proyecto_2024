@@ -170,7 +170,8 @@ void Menu_Inventario(){
     cout << "1 - Mostrar inventario" << endl;
     cout << "2 - Menu productos" << endl;
     cout << "3 - Anadir nuevo producto" << endl;
-    cout << "4 - Compra de stock" << endl;
+    cout << "4 - Anadir lote de productos" << endl;
+    cout << "5 - Compra de stock" << endl;
     cout << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
@@ -238,7 +239,23 @@ void SubMenuInventario(){
             case 3:
                 prod.registrarProducto();
                 break;
-            case 4:
+            case 4: {
+                Producto *lote;
+                int cantidad, i=0;
+                cout << "Cuantos productos diferentes desea agregar? ";
+                cin >> cantidad;
+
+                lote=new Producto[cantidad];
+
+                for (i; i<cantidad; i++){
+                    cout << endl;
+                    cout << "Producto " << i+1 << ":" << endl;
+                    lote[i].registrarProducto();
+                }
+                delete []lote;
+            }
+                break;
+            case 5:
                 compra.Cargar();
                 ///TODO -> guardar compra en archivo
                 break;

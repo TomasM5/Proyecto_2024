@@ -97,6 +97,7 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
 
             int stock=prod.getStock() - detail.getCantidad();
             prod.setStock(stock);
+            if (prod.getStock()==0) prod.setEstado(0);
 
             tam=sizeof(Producto) * i;
             FILE *p;
@@ -105,6 +106,9 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
             fwrite(&prod, sizeof(prod), 1, p);
             fclose(p);
 
+        }
+        if (prod.getID()==0) {
+            fin=true;
         }
         i++;
     }
