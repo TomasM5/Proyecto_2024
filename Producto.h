@@ -37,6 +37,12 @@ class Producto{
         void buscarProductoPorRangoPrecio();
         void buscarProductoPorFechaIngreso();
 
+        //  TODO
+        void ordenarPrecio();
+        void ordenarDescripcion();
+        void ordenarCategoria();
+        void ordenarIngreso();
+
 
     protected:
 

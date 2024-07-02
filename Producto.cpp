@@ -198,3 +198,48 @@ void Producto::buscarProductoPorFechaIngreso(){
     fclose(file);
 }
 
+//      TODO
+void Producto::ordenarPrecio() {
+    ArchivoProductos file("productos.dat");
+    Producto *registros, aux, *ordenado;
+    int cantidad=file.Contar_Registro();
+    int posPrecioMax, posPrecioMin;
+    float precioMax, precioAux, precioMin;
+    bool flag=0;
+
+    registros=new Producto[cantidad];
+//    aux=new Producto[cantidad];
+    ordenado=new Producto[cantidad];
+
+    for (int i=0; i<cantidad; i++) {
+        registros[i]=file.Leer_Registro(i);
+    }
+
+    for (int i=0; i<cantidad; i++) {
+        if (!flag) {
+            precioMax=precioMin=registros[i].getValor();
+            posPrecioMax=posPrecioMin=i;
+            flag=1;
+        }
+
+        for (int j=i+1; j<cantidad; j++){
+
+            if (registros[j].getValor()>precioMax) {
+                precioMax=registros[j].getValor();
+                posPrecioMax=j;
+            }
+            if (registros[j].getValor()<precioMin) {
+                precioMin=registros[j].getValor();
+                posPrecioMin=j;
+            }
+        }
+
+    }
+
+    delete []registros;
+    delete []ordenado;
+
+}
+//void Producto::ordenarDescripcion();
+//void Producto::ordenarCategoria();
+//void Producto::ordenarIngreso();
