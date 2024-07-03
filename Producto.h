@@ -38,9 +38,9 @@ class Producto{
         void buscarProductoPorFechaIngreso();
 
         //  TODO
-        void ordenarPrecio();
-        void ordenarDescripcion();
-        void ordenarCategoria();
+        void ordenarPrecio(Producto *registros,int cantidad, char *orden);
+        void ordenarDescripcion(Producto *registros,int cantidad);
+        void ordenarCategoria(Producto *registros,int cantidad);
         void ordenarIngreso();
 
 

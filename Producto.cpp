@@ -198,48 +198,74 @@ void Producto::buscarProductoPorFechaIngreso(){
     fclose(file);
 }
 
-//      TODO
-void Producto::ordenarPrecio() {
-    ArchivoProductos file("productos.dat");
-    Producto *registros, aux, *ordenado;
-    int cantidad=file.Contar_Registro();
-    int posPrecioMax, posPrecioMin;
-    float precioMax, precioAux, precioMin;
-    bool flag=0;
 
-    registros=new Producto[cantidad];
-//    aux=new Producto[cantidad];
-    ordenado=new Producto[cantidad];
+void Producto::ordenarPrecio(Producto *registros,int cantidad, char *orden) {
+    int posMax, posMin;
+    Producto aux;
 
-    for (int i=0; i<cantidad; i++) {
-        registros[i]=file.Leer_Registro(i);
-    }
+    for (int i=0; i<cantidad-1; i++) {
 
-    for (int i=0; i<cantidad; i++) {
-        if (!flag) {
-            precioMax=precioMin=registros[i].getValor();
-            posPrecioMax=posPrecioMin=i;
-            flag=1;
-        }
+        posMax=posMin=i;
 
         for (int j=i+1; j<cantidad; j++){
 
-            if (registros[j].getValor()>precioMax) {
-                precioMax=registros[j].getValor();
-                posPrecioMax=j;
-            }
-            if (registros[j].getValor()<precioMin) {
-                precioMin=registros[j].getValor();
-                posPrecioMin=j;
-            }
+            if (registros[j].getValor()>registros[posMax].getValor()) posMax=j;
+            if (registros[j].getValor()<registros[posMin].getValor()) posMin=j;
         }
+
+        if (strcmp(orden, "mayor")==0 && posMax!=i) {
+            aux=registros[i];
+            registros[i]=registros[posMax];
+            registros[posMax]=aux;
+        }
+        if (strcmp(orden, "menor")==0 && posMin!=i) {
+            aux=registros[i];
+            registros[i]=registros[posMin];
+            registros[posMin]=aux;
+        }
+    }
+}
+
+void Producto::ordenarDescripcion(Producto *registros,int cantidad){
+    int posMin;
+    Producto aux;
+
+    for (int i=0; i<cantidad-1; i++) {
+
+        posMin=i;
+
+        for (int j=i+1; j<cantidad; j++){
+
+            if (strcmp(registros[j].getDescripcion(),registros[posMin].getDescripcion())==-1) posMin=j;
+        }
+
+        if (posMin!=i) {
+            aux=registros[i];
+            registros[i]=registros[posMin];
+            registros[posMin]=aux;
+        }
+    }
+}
+
+void Producto::ordenarCategoria(Producto *registros,int cantidad){
+    int posAux, posMin, categoria=1;
+    Producto aux;
+
+    for (int i=1; i<6; i++){
 
     }
 
-    delete []registros;
-    delete []ordenado;
+    for (int i=0; i<cantidad; i++) {
+        posMin=i;
+        for (int j=i+1; j<cantidad; j++){
+            if (strcmp(registros[j].getDescripcion(), registros[posMin].getDescripcion())==-1) posMin=j;
+        }
 
+        if (posMin!=i) {
+            aux=registros[i];
+            registros[i]=registros[posMin];
+            registros[posMin]=aux;
+        }
+    }
 }
-//void Producto::ordenarDescripcion();
-//void Producto::ordenarCategoria();
 //void Producto::ordenarIngreso();

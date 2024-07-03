@@ -10,3 +10,15 @@ obj/Debug/main.o
 obj/Debug/Fecha.o
 obj/Debug/DetalleVenta.o
 obj/Debug/Cliente.o
+bin/Debug/Proyecto_2024.exe
+obj/Debug/Cliente.o
+obj/Debug/Compra.o
+obj/Debug/DetalleVenta.o
+obj/Debug/Fecha.o
+obj/Debug/main.o
+obj/Debug/Persona.o
+obj/Debug/Producto.o
+obj/Debug/Proveedor.o
+obj/Debug/Vendedor.o
+obj/Debug/Venta.o
+Proyecto_2024.depend
