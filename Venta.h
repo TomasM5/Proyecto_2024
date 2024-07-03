@@ -31,6 +31,7 @@ public:
     void historialVentas();
     void ventasPorCliente();
     void ventasPorProducto();
+    bool Grabar_En_Disco();
 
 private:
     int _ID;
@@ -51,6 +52,8 @@ class ArchivoVentas{
         Venta Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Venta reg);
+        bool existeID(int id);
+        bool borrarContenidoArchivo();
 
 };
 

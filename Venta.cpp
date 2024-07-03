@@ -14,9 +14,21 @@ Venta::Venta() {
 }
 
 void Venta::Cargar() {
+    ArchivoVentas archiV("ventas.dat");
+
     cout << "Cargar Venta" << endl;
-    cout << "ID: ";
-    cin >> _ID;
+    int id;
+    do {
+        cout << "ID: ";
+        cin >> id;
+        if (archiV.existeID(id)) {
+            cout << "El ID ya existe. Ingrese otro ID." << endl;
+        } else {
+            _ID = id;
+            break;
+        }
+    } while (true);
+
     _Fecha.Cargar();
     cout << "ID Vendedor: ";
     cin >> _IDvendedor;
@@ -32,6 +44,7 @@ void Venta::Mostrar() {
     cout << "Mostrar Venta" << endl;
     cout << "ID: " << _ID << endl;
     _Fecha.MostrarNumero();
+    cout << endl;
     cout << "ID Vendedor: " << _IDvendedor << endl;
     cout << "ID Cliente: " << _IDcliente << endl;
     cout << "Forma de Pago: " << _FormaPago << endl;
@@ -49,15 +62,14 @@ int ArchivoVentas::Contar_Registro() {
 
 Venta ArchivoVentas::Leer_Registro(int pos){
     Venta reg;
-    FILE *file;
-    file=fopen(nombre, "rb");
-    if(file==NULL) {
+    FILE *p = fopen(nombre, "rb");
+    if(p==NULL) {
         cout << "Error al abrir el archivo." << endl;
         return reg;
     }
-    fseek(file, sizeof reg*pos,0);
-    fread(&reg, sizeof reg,1, file);
-    fclose(file);
+    fseek(p, pos * sizeof(Venta), SEEK_SET);
+    fread(&reg, sizeof(Venta), 1, p);
+    fclose(p);
     return reg;
 }
 
@@ -112,7 +124,7 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
         }
         i++;
     }
-
+    cout << endl;
     cout << "Venta registrada exitosamente" << endl;
 }
 
@@ -155,7 +167,7 @@ void Venta::buscarVenta(){///busca una venta por su ID
         }
         if(venta.getID() == id){
             char opcion;
-            cout << "Desea ver el detalle? (s/n)";
+            cout << "Desea ver el detalle? (s/n): ";
             cin >> opcion;
             if (opcion=='s' || opcion=='S') aux.Mostrar();
             else venta.Mostrar();
@@ -172,57 +184,85 @@ void Venta::buscarVenta(){///busca una venta por su ID
 }
 
 void Venta::historialVentas(){///muestra el historial de ventas de una fecha especifica o de todo
-    ArchivoVentas file = "ventas.dat";
+    ArchivoVentas file("ventas.dat");
     Venta venta;
-    ArchivoDetalle fdet= "detalle_ventas.dat";
+    ArchivoDetalle fdet("detalle_ventas.dat");
     DetalleVenta detalle;
     Fecha fecha;
     char opcion;
-    int i=0;
-    bool fin=false;
-    bool detail=false;
+    ///int i=0;
+    ///bool fin=false;
+    ///bool detail=false;
+    bool fechaEncontrada = false;
+
     cout << "Desea consultar por fecha especifica? (s/n): ";
     cin >> opcion;
 
     if(opcion == 's' || opcion == 'S'){
-        cout << "Ingrese la fecha (dd/mm/yyyy): ";
+        cout << "Ingrese la fecha (dd/mm/yyyy): " << endl;
         fecha.Cargar();
         cout << endl;
-        cout << "Desea ver el detalle? (s/n)";
-        cin >> opcion;
-        do{
-            venta=file.Leer_Registro(i);
-            detalle=fdet.Leer_Registro(i);
-            if(venta.getID()==0){
-                cout << "No se encontraron ventas en esa fecha.";
-                fin=true;
-                break;
-            }
+
+        int cantReg = file.Contar_Registro();
+        for(int i = 0; i < cantReg; i ++){
+            venta = file.Leer_Registro(i);
+
             if(venta.getFecha() == fecha){
-                    if(opcion == 's' || opcion == 'S') detalle.Mostrar();
-                    else venta.Mostrar();
-                cout << endl;
+                fechaEncontrada = true;
             }
-            i++;
-        }while(!fin);
+        }
+
+        if(fechaEncontrada){
+            cout << "Desea ver el detalle? (s/n): ";
+            cin >> opcion;
+            cout << endl;
+
+            int cantReg = fdet.Contar_Registro();
+
+            for(int i = 0; i < cantReg; i ++){
+                if(opcion == 's' || opcion == 'S'){
+                    detalle = fdet.Leer_Registro(i);
+                    detalle.Mostrar();
+                    cout << endl;
+                }
+                else{
+                    int cantRegVen = file.Contar_Registro();
+
+                    for(int i = 0; i < cantRegVen; i ++){
+                        venta = file.Leer_Registro(i);
+                        venta.Mostrar();
+                        cout << endl;
+                    }
+                    break;
+                }
+            }
+        }
+        else{
+            cout << "No se encontraron ventas en esa fecha." << endl;
+        }
     }
     else{
-        cout << "Desea ver el detalle? (s/n)";
+        cout << "Desea ver el detalle? (s/n): ";
         cin >> opcion;
-        while(!fin){
-            venta=file.Leer_Registro(i);
-            detalle=fdet.Leer_Registro(i);
+        cout << endl;
+        int cantReg = fdet.Contar_Registro();
 
-            if(venta.getID()==0){
-                fin=true;
+        for(int i = 0; i < cantReg; i ++){
+            if(opcion == 's' || opcion == 'S'){
+                detalle = fdet.Leer_Registro(i);
+                detalle.Mostrar();
+                cout << endl;
+            }
+            else{
+                int cantRegVen = file.Contar_Registro();
+
+                for(int i = 0; i < cantRegVen; i ++){
+                    venta = file.Leer_Registro(i);
+                    venta.Mostrar();
+                    cout << endl;
+                }
                 break;
             }
-            if(opcion == 's' || opcion == 'S') detalle.Mostrar();
-            else venta.Mostrar();
-
-            cout << endl;
-            i++;
-
         }
     }
 }
@@ -266,7 +306,6 @@ void Venta::ventasPorCliente(){///muestra todas las ventas por cliente
 }
 
 
-
 void Venta::ventasPorProducto(){///muestra las ventas por producto
     int idProducto;
     cout << "Ingrese el ID del producto: ";
@@ -294,6 +333,39 @@ void Venta::ventasPorProducto(){///muestra las ventas por producto
     if(!encontrado){
         cout << "No se encontraron ventas para ese producto" << endl;
     }
+}
+
+bool Venta::Grabar_En_Disco() {
+    FILE *p = fopen("ventas.dat", "ab");
+    if (p == NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return false;
+    }
+    bool ok = fwrite(this, sizeof(Venta), 1, p);
+    fclose(p);
+    return ok;
+}
+
+bool ArchivoVentas::existeID(int id) {
+    int totalRegistros = Contar_Registro();
+    for (int i = 0; i < totalRegistros; i++) {
+        Venta venta = Leer_Registro(i);
+        if (venta.getID() == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ArchivoVentas::borrarContenidoArchivo() {
+    FILE *file = fopen(nombre, "wb");
+    if (file == NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return false;
+    }
+    fclose(file);
+    cout << "Contenido del archivo borrado exitosamente." << endl;
+    return true;
 }
 
 

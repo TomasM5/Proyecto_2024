@@ -44,6 +44,7 @@ class ArchivoDetalle{
         DetalleVenta Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(DetalleVenta reg);
+        bool borrarContenidoArchivo();
 
 };
 

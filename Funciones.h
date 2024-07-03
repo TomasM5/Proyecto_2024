@@ -48,6 +48,8 @@ void Menu_Ventas(){
     cout << "3 - Buscar venta por ID" << endl;
     cout << "4 - Ventas por cliente" << endl;
     cout << "5 - Ventas por producto" << endl;
+    cout << "6 - Borrar archivo de ventas" << endl;
+    cout << "7 - Borrar archivo de detalle ventas" << endl;
     cout << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
@@ -58,6 +60,8 @@ void Menu_Ventas(){
 void SubMenuVentas(){
     int opcVentas;
     Venta venta;
+    ArchivoVentas archiV("ventas.dat");
+    ArchivoDetalle archiD("detalle_ventas.dat");
 
     do{
         Menu_Ventas();
@@ -78,8 +82,14 @@ void SubMenuVentas(){
             case 5:
                 venta.ventasPorProducto();
                 break;
+            case 6:
+                archiV.borrarContenidoArchivo();
+                break;
+            case 7:
+                archiD.borrarContenidoArchivo();
+                break;
             case 0:
-                cout << "Volviendo al menú principal..." << endl;
+                cout << "Volviendo al menu principal..." << endl;
                 return;
             default:
                 cout << "Opcion no valida. Intente nuevamente." << endl;

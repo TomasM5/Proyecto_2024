@@ -41,12 +41,12 @@ float DetalleVenta::CalcularDescuento() {
 }
 
 int DetalleVenta::getIDVenta () {
-    Venta aux;
+    /*Venta aux;
     int id;
     aux=getVenta();
     id=aux.getID();
-
-    return id;
+    return id;*/
+    return _Venta.getID();
 }
 
 bool ArchivoDetalle::Grabar_Registro(DetalleVenta reg) {
@@ -55,21 +55,20 @@ bool ArchivoDetalle::Grabar_Registro(DetalleVenta reg) {
       cout << "Error al abrir el archivo." << endl;
       return 0;
     }
-    int grabado=fwrite(&reg, sizeof(reg), 1, file);
+    bool grabado = fwrite(&reg, sizeof(reg), 1, file);
     fclose(file);
     return grabado;
 }
 
 DetalleVenta ArchivoDetalle::Leer_Registro(int pos) {
     DetalleVenta reg;
-    FILE *file;
-    file=fopen(nombre, "rb");
+    FILE *file = fopen(nombre, "rb");
     if(file==NULL) {
         cout << "Error al abrir el archivo." << endl;
         return reg;
     }
-    fseek(file, sizeof reg*pos,0);
-    fread(&reg, sizeof reg,1, file);
+    fseek(file, sizeof(reg) * pos, SEEK_SET);
+    fread(&reg, sizeof(reg), 1, file);
     fclose(file);
     return reg;
 }
@@ -81,4 +80,15 @@ int ArchivoDetalle::Contar_Registro() {
     int tam=ftell(file);
     fclose(file);
     return tam/sizeof(DetalleVenta);
+}
+
+bool ArchivoDetalle::borrarContenidoArchivo() {
+    FILE *file = fopen(nombre, "wb");
+    if (file == NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return false;
+    }
+    fclose(file);
+    cout << "Contenido del archivo borrado exitosamente." << endl;
+    return true;
 }
