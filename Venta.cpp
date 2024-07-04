@@ -150,7 +150,6 @@ void Venta::buscarVenta(){///busca una venta por su ID
     cout << "Ingrese el ID de la venta: ";
     cin >> id;
 
-
     Venta venta;
     ArchivoVentas file="ventas.dat";
     DetalleVenta aux;
@@ -189,10 +188,8 @@ void Venta::historialVentas(){///muestra el historial de ventas de una fecha esp
     ArchivoDetalle fdet("detalle_ventas.dat");
     DetalleVenta detalle;
     Fecha fecha;
+
     char opcion;
-    ///int i=0;
-    ///bool fin=false;
-    ///bool detail=false;
     bool fechaEncontrada = false;
 
     cout << "Desea consultar por fecha especifica? (s/n): ";
@@ -209,39 +206,12 @@ void Venta::historialVentas(){///muestra el historial de ventas de una fecha esp
 
             if(venta.getFecha() == fecha){
                 fechaEncontrada = true;
+                break;
             }
-        }
-
-        if(fechaEncontrada){
-            cout << "Desea ver el detalle? (s/n): ";
-            cin >> opcion;
-            cout << endl;
-
-            int cantReg = fdet.Contar_Registro();
-
-            for(int i = 0; i < cantReg; i ++){
-                if(opcion == 's' || opcion == 'S'){
-                    detalle = fdet.Leer_Registro(i);
-                    detalle.Mostrar();
-                    cout << endl;
-                }
-                else{
-                    int cantRegVen = file.Contar_Registro();
-
-                    for(int i = 0; i < cantRegVen; i ++){
-                        venta = file.Leer_Registro(i);
-                        venta.Mostrar();
-                        cout << endl;
-                    }
-                    break;
-                }
-            }
-        }
-        else{
-            cout << "No se encontraron ventas en esa fecha." << endl;
         }
     }
     else{
+        if(!fechaEncontrada){
         cout << "Desea ver el detalle? (s/n): ";
         cin >> opcion;
         cout << endl;
@@ -262,10 +232,38 @@ void Venta::historialVentas(){///muestra el historial de ventas de una fecha esp
                     cout << endl;
                 }
                 break;
+                }
             }
         }
     }
+    if(fechaEncontrada){
+        cout << "Desea ver el detalle? (s/n): ";
+        cin >> opcion;
+        cout << endl;
+
+        if(opcion == 's' || opcion == 'S'){
+            int cantReg = fdet.Contar_Registro();
+
+
+            for(int i = 0; i < cantReg; i ++){
+                detalle = fdet.Leer_Registro(i);
+                if(detalle.getVenta().getID() == venta.getID()){
+                    detalle.Mostrar();
+                    cout << endl;
+                    break;
+                }
+
+            }
+        }
+        else{
+            venta.Mostrar();
+        }
+    }
+    else{
+        cout << "No se encontraron ventas en esa fecha." << endl;
+    }
 }
+
 
 void Venta::ventasPorCliente(){///muestra todas las ventas por cliente
     int idCliente;

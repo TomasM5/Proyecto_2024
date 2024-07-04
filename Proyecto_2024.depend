@@ -68,20 +68,20 @@
 	<cstring>
 	"Fecha.h"
 
-1719984217 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\venta.cpp
+1720063339 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\venta.cpp
 	<iostream>
 	<cstdio>
 	"Venta.h"
 	"DetalleVenta.h"
 	"Producto.h"
 
-1719976877 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\producto.cpp
+1720060248 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\producto.cpp
 	<iostream>
 	<cstdio>
 	"Producto.h"
 	"Fecha.h"
 
-1719976877 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\producto.h
+1720060248 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\producto.h
 	<cstring>
 	<cstdio>
 	"Fecha.h"
