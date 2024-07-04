@@ -132,6 +132,7 @@ void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el a
     Cargar();
     file.Grabar_Registro(*this);
     cout << "Producto registrado exitosamente" << endl;
+    system("pause");
 }
 
 void Producto::listarProductos(){ ///muestra todos los productos registrados

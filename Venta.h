@@ -54,7 +54,6 @@ class ArchivoVentas{
         bool Grabar_Registro(Venta reg);
         bool existeID(int id);
         bool borrarContenidoArchivo();
-
 };
 
 #endif // VENTA_H_INCLUDED

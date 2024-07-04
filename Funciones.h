@@ -29,7 +29,9 @@ void Menu_Principal(){
     cout << "5 - Proveedores" << endl;
     // reportes de compras del local?
 
-    cout << "6 - Configuracion" << endl;
+    cout << "6 - Recaudaciones" << endl;
+
+    cout << "7 - Configuracion" << endl;
     // ->  cargar proveedor,copias de seguridad
 
     cout << "0 - Salir";
@@ -217,6 +219,7 @@ void SubMenuProductos(){
                 break;
             case 5:
                 archiP.borrarContenidoArchivo();
+                break;
             case 0:
                 cout << "Volviendo al menu de inventario..." << endl;
                 return;
@@ -365,6 +368,53 @@ void SubmenuProveedores(){
         }
         if(opcProveedores != 0) system("pause");
     }while(opcProveedores != 0);
+}
+
+void Menu_Recaudacion(){
+    system("cls");
+    Nombre_Local();
+    cout << "           -------     RECAUDACION   ----------" << endl << endl;
+    cout << "1 - Listar recaudacion anual" << endl;
+    cout << "2 - Listar recaudacion mensual" << endl;
+    cout << "3 - Listar recaudacion por cliente" << endl;
+    cout << "4 - Listar recaudacion por producto" << endl;
+    cout << "5 - Listar productos por categoria" << endl;
+    cout << "0 - Volver al menu principal" << endl;
+    cout << endl << endl;
+    cout << "Ingrese la opcion: ";
+}
+
+void SubmenuRecaudacion(){
+    int opcRecaudacion;
+    ArchivoDetalle archiD("detalleventas.h");
+    do{
+        Menu_Recaudacion();
+        cin >> opcRecaudacion;
+        switch (opcRecaudacion){
+            case 1:
+                archiD.listarRecaudacionAnual();
+                break;
+            case 2:
+                archiD.listarRecaudacionMensual();
+                break;
+            case 3:
+                archiD.listarRecaudacionPorCliente();
+                break;
+            case 4:
+                archiD.listarRecaudacionPorProducto();
+                break;
+            case 5:
+                archiD.listarProductosPorCategoria();
+                break;
+            case 0:
+                cout << "Volviendo al menu principal..." << endl;
+                return;
+            default:
+                cout << "Opcion invalida. Intente nuevamente" << endl;
+                break;
+        }
+        if(opcRecaudacion != 0) system("pause");
+    }while(opcRecaudacion != 0);
 }
 
 void Consulta_Producto(){

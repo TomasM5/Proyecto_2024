@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdio>
 #include "DetalleVenta.h"
+#include "Producto.h"
 using namespace std;
 
 DetalleVenta::DetalleVenta() {
@@ -131,3 +132,138 @@ bool ArchivoDetalle::borrarContenidoArchivo() {
     cout << "Contenido del archivo borrado exitosamente." << endl;
     return true;
 }
+
+void ArchivoDetalle::listarRecaudacionAnual() {
+    float recaudacionTotal = 0.0;
+    DetalleVenta detalle;
+    ArchivoDetalle fdet("detalle_ventas.dat");
+
+    bool encontrado = false;
+    int anio;
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    int cantReg = fdet.Contar_Registro();
+
+    for (int i = 0; i < cantReg; i++) {
+        detalle = fdet.Leer_Registro(i);
+        if (detalle.getVenta().getFecha().getAnio() == anio) {
+            encontrado = true;
+            recaudacionTotal += detalle.getMonto();
+        }
+    }
+    if(encontrado){
+        cout << "Recaudacion total del anio " << anio << ": $" << recaudacionTotal << endl;
+    }
+    else{
+        cout << "no se registran recaudacion para la fecha seleccionada" << endl;
+    }
+
+}
+
+void ArchivoDetalle::listarRecaudacionMensual() {
+    float recaudacionTotal = 0.0;
+    DetalleVenta detalle;
+    ArchivoDetalle fdet("detalle_ventas.dat");
+
+    bool encontrado = false;
+    int mes, anio;
+    cout << "Ingrese el mes (1-12): ";
+    cin >> mes;
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    int cantReg = fdet.Contar_Registro();
+
+    for (int i = 0; i < cantReg; i++) {
+        detalle = fdet.Leer_Registro(i);
+        if (detalle.getVenta().getFecha().getMes() == mes && detalle.getVenta().getFecha().getAnio() == anio) {
+            encontrado = true;
+            recaudacionTotal += detalle.getMonto();
+        }
+    }
+    if(encontrado){
+        cout << "Recaudacion total del mes " << mes << "/" << anio << ": $" << recaudacionTotal << endl;
+    }
+    else{
+        cout << "no se registran recaudacion para la fecha seleccionada" << endl;
+    }
+}
+
+void ArchivoDetalle::listarRecaudacionPorCliente() {
+    float recaudacionTotal = 0.0;
+    DetalleVenta detalle;
+    ArchivoDetalle fdet("detalle_ventas.dat");
+
+    bool encontrado = false;
+    int IDcliente;
+    cout << "Ingrese el ID del cliente: ";
+    cin >> IDcliente;
+
+    int cantReg = fdet.Contar_Registro();
+
+    for (int i = 0; i < cantReg; i++) {
+        detalle = fdet.Leer_Registro(i);
+        if(detalle.getVenta().getIDcliente() == IDcliente){
+            encontrado = true;
+            recaudacionTotal += detalle.getMonto();
+        }
+    }
+    if(encontrado){
+        cout << "Recaudacion total del cliente " << IDcliente <<": $" << recaudacionTotal << endl;
+    }
+    else{
+        cout << "no se encontro cliente con ese ID" << endl;
+    }
+}
+
+void ArchivoDetalle::listarRecaudacionPorProducto() {
+    float recaudacionTotal = 0.0;
+    DetalleVenta detalle;
+    ArchivoDetalle fdet("detalle_ventas.dat");
+
+    bool encontrado = false;
+    int IDproducto;
+    cout << "Ingrese el ID del producto: ";
+    cin >> IDproducto;
+
+    int cantReg = fdet.Contar_Registro();
+
+    for (int i = 0; i < cantReg; i++) {
+        detalle = fdet.Leer_Registro(i);
+        if (detalle.getIDproducto() == IDproducto) {
+            encontrado = true;
+            recaudacionTotal += detalle.getMonto();
+        }
+    }
+    if(encontrado){
+        cout << "Recaudacion total del producto " << IDproducto << ": $" << recaudacionTotal << endl;
+    }
+    else{
+        cout << "no se encontro producto con ese ID" << endl;
+    }
+
+}
+
+void ArchivoDetalle::listarProductosPorCategoria() {
+    Producto prod;
+    ArchivoProductos pdet("productos.dat");
+
+    bool encontrado = false;
+    int categoria;
+    cout << "Ingrese la categoria: ";
+    cin >> categoria;
+
+    int cantReg = pdet.Contar_Registro();
+
+    for (int i = 0; i < cantReg; i++) {
+        prod = pdet.Leer_Registro(i);
+        if (prod.getCategoria() == categoria) {
+            encontrado = true;
+            prod.Mostrar();
+            cout << endl;
+        }
+    }
+    if(!encontrado) cout << "no se encontro producto con esa categoria" << endl;
+}
+

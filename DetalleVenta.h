@@ -48,6 +48,11 @@ class ArchivoDetalle{
         void Copia_Seguridad();
         void Restaurar();
 
+        void listarRecaudacionAnual();
+        void listarRecaudacionMensual();
+        void listarRecaudacionPorCliente();
+        void listarRecaudacionPorProducto();
+        void listarProductosPorCategoria();
 };
 
 #endif // DETALLEVENTA_H_INCLUDED

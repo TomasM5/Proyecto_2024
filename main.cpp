@@ -31,6 +31,10 @@ int main() {
                 system("pause");
                 break;
             case 6:
+                SubmenuRecaudacion();
+                system("pause");
+                break;
+            case 7:
                 SubmenuConfiguraciones();
                 system("pause");
                 break;
