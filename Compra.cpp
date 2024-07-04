@@ -37,9 +37,9 @@ void Compra::Cargar() {
             if(!prod.getEstado()) prod.setEstado(1);
             prod.setStock(stock);
         }
-        tam=sizeof(Producto) * i;
+        tam=sizeof(Producto) * (i-1);
         FILE *p;
-        p=fopen("productos.dat", "wb");
+        p=fopen("productos.dat", "rb+");
         fseek(p,tam,0); // desplaza el cursor hasta la posicion del producto actual
         fwrite(&prod, sizeof(prod), 1, p);
         fclose(p);

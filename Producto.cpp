@@ -99,6 +99,34 @@ bool ArchivoProductos::Grabar_Registro(Producto reg){
     return grabado;
 }
 
+void ArchivoProductos::Copia_Seguridad(){
+    Producto reg;
+    FILE *copia=fopen("copia_seguridad_productos.dat", "wb");
+
+    int cantidad=Contar_Registro();
+
+    for (int i=0; i<cantidad; i++) {
+        reg=Leer_Registro(i);
+        fwrite(&reg, sizeof(reg), 1, copia);
+    }
+    fclose (copia);
+    cout << "Copia de seguridad realizada exitosamente." << endl;
+
+}
+
+void ArchivoProductos::Restaurar(){
+    Producto reg;
+    ArchivoProductos copia("copia_seguridad_productos.dat");
+    int cant=copia.Contar_Registro();
+
+    for(int i=0; i<cant; i++){
+        reg=copia.Leer_Registro(i);
+        Grabar_Registro(reg);
+    }
+
+    cout << "Copia de seguridad restaurada exitosamente." << endl;
+}
+
 void Producto::registrarProducto(){///carga un nuevo producto y lo graba en el archivo
     ArchivoProductos file("productos.dat");
     Cargar();

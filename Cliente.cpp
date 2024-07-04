@@ -166,6 +166,34 @@ bool ArchivoClientes::Grabar_Registro(Cliente reg){
     return grabado == 1;
 }
 
+void ArchivoClientes::Copia_Seguridad(){
+    Cliente reg;
+    FILE *copia=fopen("copia_seguridad_clientes.dat", "wb");
+
+    int cantidad=Contar_Registro();
+
+    for (int i=0; i<cantidad; i++) {
+        reg=Leer_Registro(i);
+        fwrite(&reg, sizeof(reg), 1, copia);
+    }
+    fclose (copia);
+    cout << "Copia de seguridad realizada exitosamente." << endl;
+
+}
+
+void ArchivoClientes::Restaurar(){
+    Cliente reg;
+    ArchivoClientes copia("copia_seguridad_clientes.dat");
+    int cant=copia.Contar_Registro();
+
+    for(int i=0; i<cant; i++){
+        reg=copia.Leer_Registro(i);
+        Grabar_Registro(reg);
+    }
+
+    cout << "Copia de seguridad restaurada exitosamente." << endl;
+}
+
 bool ArchivoClientes::existeID(int id) {
     int cantReg = Contar_Registro();
     for (int i = 0; i < cantReg; i++) {

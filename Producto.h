@@ -79,6 +79,8 @@ class ArchivoProductos {
         Producto Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Producto reg);
+        void Copia_Seguridad();
+        void Restaurar();
         bool existeID(int id);
         bool borrarContenidoArchivo();
 };

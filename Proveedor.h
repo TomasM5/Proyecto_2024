@@ -17,6 +17,10 @@ class Proveedor : public Persona{
         void listarProveedores();
         void buscarProveedor();
         void comprasPorProveedor();
+        Proveedor Leer_Registro(int pos);
+        int Contar_Registro();
+        void Copia_Seguridad();
+        void Restaurar();
 
     protected:
 
