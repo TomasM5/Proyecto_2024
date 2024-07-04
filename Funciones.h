@@ -286,8 +286,8 @@ void Menu_Vendedores(){
     cout << "1 - Registrar Vendedor" << endl;
     cout << "2 - Listar Vendedores" << endl;
     cout << "3 - Buscar Vendedor" << endl;
-    cout << "4 - Calcular Salarios" << endl;
-    cout << "5 - Ventas por Vendedor" << endl;
+    cout << "4 - Ventas por Vendedor" << endl;
+    cout << "5 - Borrar archivo de vendedores" << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
     cout << "Ingrese la opcion: ";
@@ -296,6 +296,7 @@ void Menu_Vendedores(){
 void SubMenuVendedores(){
     int opcVendedores;
     Vendedor vendedor;
+    ArchivoVendedores archiV("vendedores.dat");
     do {
         Menu_Vendedores();
         cin >> opcVendedores;
@@ -306,15 +307,14 @@ void SubMenuVendedores(){
             case 2:
                 vendedor.listarVendedores();
                 break;
-            case 3: {
+            case 3:
                 vendedor.buscarVendedor();
                 break;
-            }
             case 4:
-                vendedor.calcularSalarios();
+                vendedor.ventasPorVendedor();
                 break;
             case 5:
-                vendedor.ventasPorVendedor();
+                archiV.borrarContenidoArchivo();
                 break;
             case 0:
                 cout << "Volviendo al menú principal..." << endl;

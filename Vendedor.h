@@ -54,6 +54,7 @@ class ArchivoVendedores{
         bool Grabar_Registro(Vendedor reg);
         void Copia_Seguridad();
         void Restaurar();
+        bool borrarContenidoArchivo();
 
 };
 

@@ -21,7 +21,7 @@ void Vendedor::Cargar(){
     Persona::Cargar();
     cout << "Legajo: ";
     cin >> leg;
-    cout << "Fecha de ingreso: ";
+    cout << "Fecha de ingreso: " << endl;
     ing.Cargar();
     cout << "Salario base: ";
     cin >> sal;
@@ -31,7 +31,6 @@ void Vendedor::Cargar(){
     setSalarioBase(sal);
     setComision(0);
     setEstado(1);
-    salarioTotal();
 }
 
 void Vendedor::Mostrar(){
@@ -48,24 +47,6 @@ void Vendedor::Mostrar(){
     cout << "Salario total: " << getSalarioTotal();
     cout << endl;
 
-}
-
-/*void Vendedor::calcularComision() {
-    float monto, comi;
-
-    monto=DetalleVenta::getMonto();
-
-    comi=getComision() + (monto * 0.1); // 10% comision como ejemplo
-
-    setComision(comi);
-}*/
-
-void Vendedor::salarioTotal(){
-    float sal;
-
-    sal= getSalarioBase() + getComision();
-
-    setSalarioTotal(sal);
 }
 
 int ArchivoVendedores::Contar_Registro() {
@@ -132,28 +113,23 @@ void ArchivoVendedores::Restaurar(){
 }
 
 void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
-    ArchivoVendedores arch="vendedores.dat";
-    Vendedor *a;
+    ArchivoVendedores file("vendedores.dat");
     Cargar();
-    a=this;
-    arch.Grabar_Registro(*a);
+    file.Grabar_Registro(*this);
     cout << "Vendedor registrado correctamente" << endl;
 }
 
 void Vendedor::listarVendedores(){ ///muestra todos los vendedores registrado
     Vendedor vendedor;
-    ArchivoVendedores file="vendedores.dat";
-    int i=0;
-    bool fin=false;
-    while(!fin){
-        vendedor=file.Leer_Registro(i);
-        if (vendedor.getEstado()==0) {
-            fin=true;
-            break;
+    ArchivoVendedores file("vendedores.dat");
+    int cantReg = file.Contar_Registro();
+
+    for(int i = 0; i < cantReg; i ++){
+        vendedor = file.Leer_Registro(i);
+        if(vendedor.getEstado()){
+            vendedor.Mostrar();
+            cout << endl;
         }
-        vendedor.Mostrar();
-        cout << endl;
-        i++;
     }
 }
 
@@ -162,7 +138,7 @@ void Vendedor::buscarVendedor(){ ///busca y muestra un vendedor por su legajo
     cout << "Ingrese el legajo del vendedor: ";
     cin >> legajo;
 
-    FILE *file = fopen("vendedores.dat", "rb");
+    FILE* file=fopen("vendedores.dat", "rb");
     if (file == NULL){
         cout << "Error al abrir el archivo" << endl;
         return;
@@ -170,6 +146,7 @@ void Vendedor::buscarVendedor(){ ///busca y muestra un vendedor por su legajo
 
     Vendedor vendedor;
     bool encontrado = false;
+
     while(fread(&vendedor, sizeof(Vendedor), 1, file)){
         if(vendedor.getLegajo() == legajo){
             vendedor.Mostrar();
@@ -182,25 +159,6 @@ void Vendedor::buscarVendedor(){ ///busca y muestra un vendedor por su legajo
     if(!encontrado){
         cout << "No se encontro un vendedor con el legajo " << legajo << endl;
     }
-}
-
-void Vendedor::calcularSalarios(){///calcular y actualiza los salarios de todos los vendedores
-    FILE *file = fopen("vendedores.dat", "rb+");
-    if (file == NULL){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
-    Vendedor vendedor;
-    bool encontrado = false;
-    while(fread(&vendedor, sizeof(Vendedor), 1, file)){
-        vendedor.salarioTotal();
-        fseek(file, sizeof(Vendedor), SEEK_CUR);
-        fwrite(&vendedor, sizeof(Vendedor), 1, file);
-    }
-    fclose(file);
-
-    cout << "Salarios calculados y actualizados exitosamente" << endl;
 }
 
 void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un vendedor especifico
@@ -223,6 +181,8 @@ void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un v
     }
     fclose(archemp);
 
+    cout << endl;
+
     FILE *file = fopen("ventas.dat", "rb");
     if(file == NULL){
         cout << "Error al abrir el archivo de ventas" << endl;
@@ -243,4 +203,15 @@ void Vendedor::ventasPorVendedor(){///lista todas las ventas realizadas por un v
     if (!encontrado) {
         cout << "No se encontraron ventas para el legajo " << legajo << endl;
     }
+}
+
+bool ArchivoVendedores::borrarContenidoArchivo(){
+    FILE *file = fopen("vendedores.dat", "wb");
+    if (file == NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return false;
+    }
+    fclose(file);
+    cout << "Contenido del archivo borrado exitosamente." << endl;
+    return true;
 }
