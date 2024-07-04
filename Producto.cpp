@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdio>
+#include "rlutil.h"
 #include "Producto.h"
 #include "Fecha.h"
 using namespace std;
@@ -51,18 +52,30 @@ void Producto::Cargar(){
     cout << endl;
 }
 
-void Producto::Mostrar(){
-    cout << "Mostrar Producto" << endl;
-    cout << "ID: " << _ID << endl;
-    cout << "Marca: " << _Marca << endl;
-    cout << "Descripcion: " << _Descripcion << endl;
-    cout << "Categoria: " << _Categoria << endl;
-    cout << "Stock: " << _Stock << endl;
-    cout << "Valor: " << _Valor << endl;
-    cout << "Estado: " << (_Estado ? "Activo" : "Inactivo") << endl;
-    cout << "Fecha de ingreso: ";
+void Producto::Mostrar(int fila){
+//    rlutil :: tcols()
+//    cout << "Mostrar Producto" << endl;
+    gotoxy(2,fila);
+    cout << _ID;
+    gotoxy(6,fila);
+    cout << _Marca;
+    gotoxy(12,fila);
+    cout  <<_Descripcion;
+    gotoxy(50,fila);
+    cout <<  _Categoria;
+    gotoxy(60,fila);
+    cout <<_Stock;
+    gotoxy(70,fila);
+    cout << _Valor;
+    gotoxy(80,fila);
+    cout << (_Estado ? "Activo" : "Inactivo") << "\t";
+    gotoxy(90,fila);
     _Ingreso.MostrarNumero();
     cout << endl;
+
+
+//    cout << getID() << "\t" << getMarca() << "\t" << getDescripcion() << "\t\t\t" << getStock() << "\t" << getValor() << "\t" << (getEstado() ? "Activo" : "Inactivo") << "\t" <<  getFechaIngreso().MostrarNumero();
+//    cout << endl;
 }
 
 int ArchivoProductos::Contar_Registro() {
@@ -139,12 +152,31 @@ void Producto::listarProductos(){ ///muestra todos los productos registrados
     Producto aux;
     ArchivoProductos file("productos.dat");
     int cantReg = file.Contar_Registro();
+    int fila=16;
+    cout << endl;
+    gotoxy(2,fila);
+    cout << "ID" ;
+    gotoxy(6,fila);
+    cout<< "Marca" ;
+    gotoxy(12,fila);
+    cout<< "Descripcion" ;
+    gotoxy(50,fila);
+    cout<< "Categoria" ;
+    gotoxy(60,fila);
+    cout<< "Stock";
+    gotoxy(70,fila);
+    cout<< "Valor" ;
+    gotoxy(80,fila);
+    cout<< "Estado" ;
+    gotoxy(90,fila);
+    cout<< "Fecha de ingreso";
+    cout << endl;
 
     for(int i = 0; i < cantReg; i++){
         aux = file.Leer_Registro(i);
         if(aux.getEstado()){
-            aux.Mostrar();
-            cout << endl;
+            fila++;
+            aux.Mostrar(fila);
         }
     }
     system("pause");
@@ -165,7 +197,7 @@ void Producto::buscarProductoPorID(){
         prod = file.Leer_Registro(i);
         if(prod.getID() == id && prod.getEstado()){
             encontrado = true;
-            prod.Mostrar();
+            prod.Mostrar(16);
             cout << endl;
         }
     }
@@ -192,12 +224,13 @@ void Producto::buscarProductoPorCategoria(){
     bool encontrado = false;
 
     int cantReg = file.Contar_Registro();
-
+    int fila=16;
     for(int i = 0; i < cantReg; i ++){
         prod = file.Leer_Registro(i);
         if(prod.getCategoria() == categoria && prod.getEstado()){
             encontrado = true;
-            prod.Mostrar();
+            prod.Mostrar(fila);
+            fila++;
             cout << endl;
         }
     }
@@ -217,11 +250,12 @@ void Producto::buscarProductoPorRangoPrecio(){
     cin >> precioMax;
 
     int cantReg = file.Contar_Registro();
-
+    int fila=20;
     for(int i = 0; i < cantReg; i ++){
         prod = file.Leer_Registro(i);
         if(prod.getValor() >= precioMin && prod.getValor() <= precioMax){
-            prod.Mostrar();
+            prod.Mostrar(fila);
+            fila++;
             cout << endl;
         }
     }
@@ -241,10 +275,12 @@ void Producto::buscarProductoPorFechaIngreso(){
 
     bool encontrado = false;
     Producto producto;
+    int fila=20;
     while(fread(&producto, sizeof(Producto), 1, file)){
         if(producto.getFechaIngreso() == fecha){
             encontrado = true;
-            producto.Mostrar();
+            producto.Mostrar(fila);
+            fila++;
             cout << endl;
         }
     }

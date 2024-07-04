@@ -10,7 +10,7 @@ class Producto{
         Producto();
 
         void Cargar();
-        void Mostrar();
+        void Mostrar(int fila);
 
         void setID(int val){ _ID = val;}
         void setMarca(const char *val){ strcpy(_Marca, val);}
