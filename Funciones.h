@@ -108,6 +108,7 @@ void Menu_Clientes(){
     cout << "3 - Buscar cliente" << endl;
     cout << "4 - Buscar DNI" << endl; // consulta de cliente por dni
     cout << "5 - Buscar nombre" << endl;
+    cout << "6 - Borrar archivo cliente" << endl;
     cout << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
@@ -118,6 +119,7 @@ void Menu_Clientes(){
 void SubMenuClientes(){
     int opcClientes;
     Cliente cliente;
+    ArchivoClientes archiC("clientes.dat");
     do {
         Menu_Clientes();
         cin >> opcClientes;
@@ -128,28 +130,18 @@ void SubMenuClientes(){
             case 2:
                 cliente.listarClientes();
                 break;
-            case 3: {
-                int id;
-                cout << "Ingrese ID del cliente: ";
-                cin >> id;
-                cliente.buscarClientePorID(id);
+            case 3:
+                cliente.buscarClientePorID();
                 break;
-            }
-            case 4: {
-                int dni;
-                cout << "Ingrese DNI del cliente: ";
-                cin >> dni;
-                cliente.buscarClientePorDNI(dni);
+            case 4:
+                cliente.buscarClientePorDNI();
                 break;
-            }
-            case 5: {
-                char nombre[50];
-                cout << "Ingrese nombre del cliente: ";
-                cin.ignore();
-                cin.getline(nombre, 50);
-                cliente.buscarClientePorNombre(nombre);
+            case 5:
+                cliente.buscarClientePorNombre();
                 break;
-            }
+            case 6:
+                archiC.borrarContenidoArchivo();
+                break;
             case 0:
                 cout << "Volviendo al menú principal..." << endl;
                 return;

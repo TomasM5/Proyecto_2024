@@ -25,9 +25,9 @@ class Cliente : public Persona{
 
         void registrarCliente();
         void listarClientes();
-        void buscarClientePorID(int id);
-        void buscarClientePorDNI(int dni);
-        void buscarClientePorNombre(const char* nombre);
+        void buscarClientePorID();
+        void buscarClientePorDNI();
+        void buscarClientePorNombre();
 
     protected:
 
@@ -55,6 +55,8 @@ class ArchivoClientes{
         Cliente Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Cliente reg);
+        bool borrarContenidoArchivo();
+        bool existeID(int id);
 
 };
 

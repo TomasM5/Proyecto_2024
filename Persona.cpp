@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #include "Persona.h"
+#include "Cliente.h"
 
 Persona::Persona() {
     _ID = 0;
@@ -10,8 +11,20 @@ Persona::Persona() {
 }
 
 void Persona::Cargar() {
-    cout << "ID: ";
-    cin >> _ID;
+    ArchivoClientes archiC("clientes.dat");
+    int id;
+
+    do {
+        cout << "ID: ";
+        cin >> id;
+        if (archiC.existeID(id)) {
+            cout << "El ID ya existe. Ingrese otro ID." << endl;
+        } else {
+            _ID = id;
+            break;
+        }
+    } while (true);
+
     cout << "Nombre: ";
     cin.ignore();
     cin.getline(_Nombre, 20);

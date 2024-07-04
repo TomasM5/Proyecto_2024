@@ -39,81 +39,97 @@ void Cliente::Mostrar() {
 
 void Cliente::registrarCliente(){///carga un nuevo cliente y lo graba en el archivo
     ArchivoClientes file="clientes.dat";
-    Cliente *a;
     Cargar();
-    a=this;
-    file.Grabar_Registro(*a);
+    file.Grabar_Registro(*this);
     cout << "Cliente registrado exitosamente" << endl;
 }   // ver registrarVendedor
 
 void Cliente::listarClientes(){ ///muestra todos los clientes registrados
     Cliente aux;
-    ArchivoClientes file="clientes.dat";
+    ArchivoClientes file("clientes.dat");
+    int cantReg = file.Contar_Registro();
 
-    int i=0;
-    bool fin=false;
-    while(!fin){
-        aux=file.Leer_Registro(i);
-        if (aux.getEstado()) {
-            fin=true;
-            break;
-        }
-        aux.Mostrar();
-        cout << endl;
-        i++;
-
-    }
-}
-
-void Cliente::buscarClientePorID(int id){ ///busca y muestra un cliente por su ID
-    ArchivoClientes file="clientes.dat";
-    Cliente aux;
-
-    int i=0;
-    do{
-        aux=file.Leer_Registro(i);
-        if(aux.getID() == id){
+    for(int i = 0; i < cantReg; i++){
+        aux = file.Leer_Registro(i);
+        if(aux.getEstado()){
             aux.Mostrar();
-            return;
+            cout << endl;
         }
-        i++;
-    }while (aux.getEstado()!=0);
-    cout << "Cliente no encontrado" << endl;
+    }
+}
+
+void Cliente::buscarClientePorID(){ ///busca y muestra un cliente por su ID
+    ArchivoClientes file("clientes.dat");
+    Cliente reg;
+
+    bool encontrado = false;
+    int id;
+    cout << "Ingrese ID del cliente: ";
+    cin >> id;
+
+    int cantReg = file.Contar_Registro();
+
+    for(int i = 0; i < cantReg; i ++){
+        reg = file.Leer_Registro(i);
+        if(reg.getID() == id && reg.getEstado()){
+            encontrado = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+    if(!encontrado){
+        cout << "Cliente no encontrado" << endl;
+    }
+}
+
+void Cliente::buscarClientePorDNI(){ ///busca y muestra un cliente por su DNI
+    ArchivoClientes file("clientes.dat");
+    Cliente reg;
+
+    bool encontrado = false;
+    int dni;
+        cout << "Ingrese DNI del cliente: ";
+        cin >> dni;
+
+    int cantReg = file.Contar_Registro();
+
+    for(int i = 0; i < cantReg; i ++){
+        reg = file.Leer_Registro(i);
+        if(reg.getDNI() == dni && reg.getEstado()){
+            encontrado = true;
+            reg.Mostrar();
+            cout << endl;
+        }
+    }
+    if(!encontrado){
+        cout << "Cliente no encontrado" << endl;
+    }
 
 }
 
-void Cliente::buscarClientePorDNI(int dni){ ///busca y muestra un cliente por su DNI
-    ArchivoClientes file="clientes.dat";
-    Cliente aux;
+void Cliente::buscarClientePorNombre(){ ///busca y muestra un cliente por su nombre
+    ArchivoClientes file("clientes.dat");
+    Cliente reg;
 
-    int i=0;
-    do{
-        aux=file.Leer_Registro(i);
-        if(aux.getDNI() == dni){
-            aux.Mostrar();
-            return;
-        }
-        i++;
-    }while (aux.getEstado()!=0);
-    cout << "Cliente no encontrado" << endl;
+    bool encontrado = false;
+    char nombre[50];
+    cout << "Ingrese nombre del cliente: ";
+    cin.ignore();
+    cin.getline(nombre, 50);
 
-}
+    int cantReg = file.Contar_Registro();
 
-void Cliente::buscarClientePorNombre(const char* nombre){ ///busca y muestra un cliente por su nombre
-    FILE *file = fopen("clientes.dat", "rb");
-    if(file == NULL) {
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-    while(fread(this, sizeof(Cliente), 1, file)) {
-        if(strcmp(this->getNombre(), nombre) == 0) {
-            Mostrar();
-            fclose(file);
-            return;
+    for(int i = 0; i < cantReg; i ++){
+        reg = file.Leer_Registro(i);
+        if(strcmp(reg.getNombre(), nombre) == 0 && reg.getEstado()){
+            encontrado = true;
+            reg.Mostrar();
+            cout << endl;
         }
     }
-    cout << "Cliente no encontrado" << endl;
-    fclose(file);
+    if(!encontrado){
+        cout << "Cliente no encontrado" << endl;
+    }
 }
 
 int ArchivoClientes::Contar_Registro() {
@@ -133,8 +149,8 @@ Cliente ArchivoClientes::Leer_Registro(int pos){
         cout << "Error al abrir el archivo." << endl;
         return reg;
     }
-    fseek(file, sizeof reg*pos,0);
-    fread(&reg, sizeof reg,1, file);
+    fseek(file, sizeof(Cliente) * pos, 0);
+    fread(&reg, sizeof(Cliente), 1, file);
     fclose(file);
     return reg;
 }
@@ -145,7 +161,29 @@ bool ArchivoClientes::Grabar_Registro(Cliente reg){
       cout << "Error al abrir el archivo." << endl;
       return false;
     }
-    int grabado=fwrite(&reg, sizeof(reg), 1, file);
+    int grabado = fwrite(&reg, sizeof(Cliente), 1, file);
     fclose(file);
-    return grabado;
+    return grabado == 1;
+}
+
+bool ArchivoClientes::existeID(int id) {
+    int cantReg = Contar_Registro();
+    for (int i = 0; i < cantReg; i++) {
+        Cliente cliente = Leer_Registro(i);
+        if (cliente.getID() == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ArchivoClientes::borrarContenidoArchivo(){
+    FILE *file = fopen(nombre, "wb");
+    if (file == NULL) {
+        cout << "Error al abrir el archivo." << endl;
+        return false;
+    }
+    fclose(file);
+    cout << "Contenido del archivo borrado exitosamente." << endl;
+    return true;
 }

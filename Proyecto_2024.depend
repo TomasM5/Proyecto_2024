@@ -37,9 +37,10 @@
 
 1719976876 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\fecha.h
 
-1717643888 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\persona.cpp
+1720066167 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\persona.cpp
 	<iostream>
 	"Persona.h"
+	"Cliente.h"
 
 1719756897 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\persona.h
 	<cstdio>
@@ -86,13 +87,13 @@
 	<cstdio>
 	"Fecha.h"
 
-1719089921 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\cliente.cpp
+1720066230 source:c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\cliente.cpp
 	<iostream>
 	<cstdio>
 	<cstring>
 	"Cliente.h"
 
-1719756897 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\cliente.h
+1720066203 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\cliente.h
 	<cstring>
 	<cstdio>
 	"Persona.h"
@@ -122,7 +123,7 @@
 	"DetalleVenta.h"
 	"Compra.h"
 
-1719981165 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\funciones.h
+1720065851 c:\users\leonarrdo_z\desktop\workspace\2024\labo 2\proyecto_tomi\proyecto_2024\funciones.h
 	<cstring>
 	<iostream>
 
