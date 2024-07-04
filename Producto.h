@@ -79,6 +79,9 @@ class ArchivoProductos {
         int Contar_Registro ();
         bool Grabar_Registro(Producto reg);
 
+        void Copia_Seguridad();
+        void Restaurar();
+
 };
 
 #endif // PRODUCTO_H_INCLUDED

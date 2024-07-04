@@ -243,13 +243,13 @@ void SubMenuInventario(){
                 break;
             case 4: {
                 Producto *lote;
-                int cantidad, i=0;
+                int cantidad, i;
                 cout << "Cuantos productos diferentes desea agregar? ";
                 cin >> cantidad;
 
                 lote=new Producto[cantidad];
 
-                for (i; i<cantidad; i++){
+                for (i=0; i<cantidad; i++){
                     cout << endl;
                     cout << "Producto " << i+1 << ":" << endl;
                     lote[i].registrarProducto();
@@ -409,8 +409,7 @@ void Menu_Copia_Seguridad(){
     cout << "2 - CLIENTES" << endl;
     cout << "3 - PROVEEDORES" << endl;
     cout << "4 - VENTAS" << endl;
-    cout << "5 - CATEGORIAS" << endl;
-    cout << "6 - TODOS LOS ARCHIVOS" << endl;
+    cout << "5 - TODOS LOS ARCHIVOS" << endl;
     cout << "-------------------------------------" << endl;
     cout << "0 - SALIR" << endl;
     cout << "OPCION: ";
@@ -425,8 +424,7 @@ void Menu_Restaurar_Copia(){
     cout << "2 - CLIENTES" << endl;
     cout << "3 - PROVEEDORES" << endl;
     cout << "4 - VENTAS" << endl;
-    cout << "5 - CATEGORIAS" << endl;
-    cout << "6 - TODOS LOS ARCHIVOS" << endl;
+    cout << "5 - TODOS LOS ARCHIVOS" << endl;
     cout << "-------------------------------------" << endl;
     cout << "0 - SALIR" << endl;
     cout << "OPCION: ";
@@ -441,8 +439,7 @@ void Menu_Exportar(){
     cout << "2 - CLIENTES" << endl;
     cout << "3 - PROVEEDORES" << endl;
     cout << "4 - VENTAS" << endl;
-    cout << "5 - CATEGORIAS" << endl;
-    cout << "6 - TODOS LOS ARCHIVOS" << endl;
+    cout << "5 - TODOS LOS ARCHIVOS" << endl;
     cout << "-------------------------------------" << endl;
     cout << "0 - SALIR" << endl;
     cout << "OPCION: ";
@@ -476,27 +473,37 @@ void SubmenuConfiguraciones(){
 
 void SubMenu_Copia_Seguridad(){
     int opcConfig;
+    ArchivoProductos fileProd("productos.dat");
+    ArchivoClientes fileCli("clientes.dat");
+    Proveedor copia;
+    ArchivoDetalle fileDet("detalle_ventas.dat");
     do{
         Menu_Copia_Seguridad();
         cin >> opcConfig;
         switch (opcConfig){
             case 1:
                 ///COPIA SEGURIDAD PRODUCTO
+                fileProd.Copia_Seguridad();
                 break;
             case 2:
                 ///COPIA SEGURIDAD CLIENTE
+                fileCli.Copia_Seguridad();
                 break;
             case 3:
                 ///COPIA SEGURIDAD PROVEEDORES
+                copia.Copia_Seguridad();
                 break;
             case 4:
                 ///COPIA SEGURIDAD VENTAS
+                fileDet.Copia_Seguridad();
                 break;
-            case 5:
-                ///COPIA SEGURIDAD CATEGORIA
-                break;
-            case 6:
+            case 5:{
                 ///COPIA SEGURIDAD TODO
+                fileProd.Copia_Seguridad();
+                fileCli.Copia_Seguridad();
+                copia.Copia_Seguridad();
+                fileDet.Copia_Seguridad();
+            }
                 break;
             case 0:
                 cout << "Volviendo al menu principal..." << endl;
@@ -511,27 +518,37 @@ void SubMenu_Copia_Seguridad(){
 
 void SubMenu_Restaruar_copia(){
     int opcConfig;
+    ArchivoProductos fileProd("productos.dat");
+    ArchivoClientes fileCli("clientes.dat");
+    Proveedor copia;
+    ArchivoDetalle fileDet("detalle_ventas.dat");
     do{
         Menu_Restaurar_Copia();
         cin >> opcConfig;
         switch (opcConfig){
             case 1:
                 ///RESTAURAR COPIA PRODUCTO
+                fileProd.Restaurar();
                 break;
             case 2:
                 ///RESTAURAR COPIA CLIENTE
+                fileCli.Restaurar();
                 break;
             case 3:
                 ///RESTAURAR COPIA PROVEEDORES
+                copia.Restaurar();
                 break;
             case 4:
                 ///RESTAURAR COPIA VENTAS
+                fileDet.Restaurar();
                 break;
-            case 5:
-                ///RESTAURAR COPIA CATEGORIA
-                break;
-            case 6:
+            case 5:{
                 ///RESTAURAR COPIA TODO
+                fileDet.Restaurar();
+                copia.Restaurar();
+                fileCli.Restaurar();
+                fileProd.Restaurar();
+            }
                 break;
             case 0:
                 cout << "Volviendo al menu principal..." << endl;

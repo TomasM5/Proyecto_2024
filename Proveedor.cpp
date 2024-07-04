@@ -54,6 +54,66 @@ void Proveedor::listarProveedores(){///muestra todos los proveedores registrados
     fclose(file);
 }
 
+Proveedor Proveedor::Leer_Registro(int pos) {
+    Proveedor reg;
+    FILE *file=fopen("proveedores.dat", "rb");
+    if(file == NULL) {
+        cout << "Error al abrir el archivo" << endl;
+        return reg;
+    }
+    fseek(file, pos * sizeof(Proveedor), SEEK_SET);
+    fread(&reg, sizeof(Proveedor), 1, file);
+    fclose(file);
+    return reg;
+}
+
+int Proveedor::Contar_Registro() {
+    FILE *file=fopen("proveedores.dat", "rb");
+    if (file==NULL) {return -1;}
+    fseek(file, 0, 2);
+    int tam=ftell(file);
+    fclose(file);
+    return tam/sizeof(Proveedor);
+}
+
+void Proveedor::Copia_Seguridad(){
+    FILE *copia=fopen("copia_seguridad_proveedores.dat", "wb");
+    Proveedor reg;
+    int cant=Contar_Registro();
+
+
+    int cantidad=Contar_Registro();
+
+    for (int i=0; i<cantidad; i++) {
+        reg=Leer_Registro(i);
+        fwrite(&reg, sizeof(reg), 1, copia);
+    }
+    fclose (copia);
+    cout << "Copia de seguridad realizada exitosamente." << endl;
+}
+
+void Proveedor::Restaurar(){
+    FILE *file=fopen("copia_seguridad_proveedores.dat", "rb");
+    if (file==NULL) {return;}
+    fseek(file, 0, 2);
+    int tam=ftell(file);
+    int cantidad=tam/sizeof(Proveedor);
+    fseek(file,0,0);
+
+    Proveedor reg;
+    FILE *p=fopen("proveedores.dat", "ab");
+
+    for (int i=0; i<cantidad; i++) {
+        fseek(file, i * sizeof(Proveedor), SEEK_SET);
+        fread(&reg, sizeof(Proveedor), 1, file);
+        fwrite(&reg, sizeof(reg), 1, p);
+    }
+    cout << "Copia de seguridad restaurada exitosamente." << endl;
+
+    fclose(file);
+    fclose(p);
+}
+
 void Proveedor::buscarProveedor(){///busca y muestra un proveedor por su ID
     int id;
     cout << "Ingrese el ID del proveedor: ";

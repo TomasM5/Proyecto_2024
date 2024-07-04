@@ -38,7 +38,7 @@ void Compra::Cargar() {
 
             tam=sizeof(Producto) * (i-1); //    para grabar sobre el elemento encontrado ¿tiene que ir en la misma posicion o antes? -T
             FILE *p;
-            p=fopen("productos.dat", "wb");
+            p=fopen("productos.dat", "rb+");
             fseek(p,tam,0); // desplaza el cursor hasta la posicion del producto actual
             fwrite(&prod, sizeof(prod), 1, p);
             fclose(p);

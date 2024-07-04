@@ -57,6 +57,8 @@ class ArchivoClientes{
         bool Grabar_Registro(Cliente reg);
         bool borrarContenidoArchivo();
         bool existeID(int id);
+        void Copia_Seguridad();
+        void Restaurar();
 
 };
 
