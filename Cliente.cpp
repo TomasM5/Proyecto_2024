@@ -38,7 +38,7 @@ void Cliente::Mostrar() {
 }
 
 void Cliente::registrarCliente(){///carga un nuevo cliente y lo graba en el archivo
-    ArchivoClientes file="clientes.dat";
+    ArchivoClientes file("clientes.dat");
     Cargar();
     file.Grabar_Registro(*this);
     cout << "Cliente registrado exitosamente" << endl;

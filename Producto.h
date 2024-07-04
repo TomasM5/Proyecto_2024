@@ -36,6 +36,7 @@ class Producto{
         void buscarProductoPorCategoria();
         void buscarProductoPorRangoPrecio();
         void buscarProductoPorFechaIngreso();
+        void registrarProductosEnLote();
 
         //  TODO
         void ordenarPrecio(Producto *registros,int cantidad, char *orden);
@@ -78,7 +79,8 @@ class ArchivoProductos {
         Producto Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Producto reg);
-
+        bool existeID(int id);
+        bool borrarContenidoArchivo();
 };
 
 #endif // PRODUCTO_H_INCLUDED

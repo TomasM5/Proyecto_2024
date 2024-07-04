@@ -106,7 +106,7 @@ void Menu_Clientes(){
     cout << "1 - Registrar cliente nuevo" << endl;
     cout << "2 - Lista de clientes" << endl;
     cout << "3 - Buscar cliente" << endl;
-    cout << "4 - Buscar DNI" << endl; // consulta de cliente por dni
+    cout << "4 - Buscar DNI" << endl;
     cout << "5 - Buscar nombre" << endl;
     cout << "6 - Borrar archivo cliente" << endl;
     cout << endl;
@@ -188,6 +188,7 @@ void Menu_Productos(){
     cout << "2 - Buscar por categoria" << endl;
     cout << "3 - Buscar por rango de precio" << endl;
     cout << "4 - Buscar por fecha de ingreso" << endl;
+    cout << "5 - Borrar archivo de productos" << endl;
     cout << endl;
     cout << "0 - Volver al menu de inventario" << endl;
     cout << endl << endl;
@@ -197,6 +198,7 @@ void Menu_Productos(){
 void SubMenuProductos(){
     int opcProductos;
     Producto producto;
+    ArchivoProductos archiP("productos.dat");
     do {
         Menu_Productos();
         cin >> opcProductos;
@@ -213,6 +215,8 @@ void SubMenuProductos(){
             case 4:
                 producto.buscarProductoPorFechaIngreso();
                 break;
+            case 5:
+                archiP.borrarContenidoArchivo();
             case 0:
                 cout << "Volviendo al menu de inventario..." << endl;
                 return;
@@ -241,21 +245,8 @@ void SubMenuInventario(){
             case 3:
                 prod.registrarProducto();
                 break;
-            case 4: {
-                Producto *lote;
-                int cantidad, i=0;
-                cout << "Cuantos productos diferentes desea agregar? ";
-                cin >> cantidad;
-
-                lote=new Producto[cantidad];
-
-                for (i; i<cantidad; i++){
-                    cout << endl;
-                    cout << "Producto " << i+1 << ":" << endl;
-                    lote[i].registrarProducto();
-                }
-                delete []lote;
-            }
+            case 4:
+                prod.registrarProductosEnLote();
                 break;
             case 5:
                 compra.Cargar();
@@ -267,9 +258,9 @@ void SubMenuInventario(){
             default:
                 cout << "Opción invalida. Intente nuevamente" << endl;
                 break;
-        }
         if (opcInv != 0) system("pause");
-    } while (opcInv != 0);
+        }
+    }while (opcInv != 0);
 }
 
 void Lista_Inventario(){

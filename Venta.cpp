@@ -101,7 +101,7 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
     filedet.Grabar_Registro(detail);
 
     //  LA SIGUIENTE SECCION MODIFICA EL STOCK EN INVENTARIO DEL PRODUCTO VENDIDO
-    int i=0, tam;
+    /*int i=0, tam;
     bool fin=false;
     while (!fin){
         prod=fprod.Leer_Registro(i);
@@ -113,9 +113,13 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
 
             tam=sizeof(Producto) * i;
             FILE *p;
-            p=fopen("productos.dat", "wb");
+            p=fopen("productos.dat", "rb+");
+            if(p == NULL) cout << "Error al abrir el archivo" << endl; return;
+
             fseek(p,tam,0); // desplaza el cursor hasta la posicion del producto actual
+
             fwrite(&prod, sizeof(prod), 1, p);
+
             fclose(p);
 
         }
@@ -123,7 +127,7 @@ void Venta::registrarVenta(){///registra la venta y la carga en el archivo
             fin=true;
         }
         i++;
-    }
+    }*/
     cout << endl;
     cout << "Venta registrada exitosamente" << endl;
 }
@@ -195,72 +199,60 @@ void Venta::historialVentas(){///muestra el historial de ventas de una fecha esp
     cout << "Desea consultar por fecha especifica? (s/n): ";
     cin >> opcion;
 
-    if(opcion == 's' || opcion == 'S'){
+    if(opcion == 's' || opcion == 'S') {
         cout << "Ingrese la fecha (dd/mm/yyyy): " << endl;
         fecha.Cargar();
         cout << endl;
 
         int cantReg = file.Contar_Registro();
-        for(int i = 0; i < cantReg; i ++){
+        for(int i = 0; i < cantReg; i++) {
             venta = file.Leer_Registro(i);
-
-            if(venta.getFecha() == fecha){
+            if(venta.getFecha() == fecha) {
                 fechaEncontrada = true;
                 break;
             }
         }
-    }
-    else{
-        if(!fechaEncontrada){
-        cout << "Desea ver el detalle? (s/n): ";
+
+        if(fechaEncontrada) {
+            cout << "Desea ver el detalle? (s/n): ";
+            cin >> opcion;
+            cout << endl;
+
+            if(opcion == 's' || opcion == 'S') {
+                int cantRegDet = fdet.Contar_Registro();
+                for(int i = 0; i < cantRegDet; i++) {
+                    detalle = fdet.Leer_Registro(i);
+                    if(detalle.getVenta().getID() == venta.getID()) {
+                        detalle.Mostrar();
+                        cout << endl;
+                    }
+                }
+            } else {
+                venta.Mostrar();
+            }
+        } else {
+            cout << "No se encontraron ventas en esa fecha." << endl;
+        }
+    } else {
+        cout << "Desea ver el detalle de todas las ventas? (s/n): ";
         cin >> opcion;
         cout << endl;
-        int cantReg = fdet.Contar_Registro();
 
-        for(int i = 0; i < cantReg; i ++){
-            if(opcion == 's' || opcion == 'S'){
+        if(opcion == 's' || opcion == 'S') {
+            int cantRegDet = fdet.Contar_Registro();
+            for(int i = 0; i < cantRegDet; i++) {
                 detalle = fdet.Leer_Registro(i);
                 detalle.Mostrar();
                 cout << endl;
             }
-            else{
-                int cantRegVen = file.Contar_Registro();
-
-                for(int i = 0; i < cantRegVen; i ++){
-                    venta = file.Leer_Registro(i);
-                    venta.Mostrar();
-                    cout << endl;
-                }
-                break;
-                }
+        } else {
+            int cantRegVen = file.Contar_Registro();
+            for(int i = 0; i < cantRegVen; i++) {
+                venta = file.Leer_Registro(i);
+                venta.Mostrar();
+                cout << endl;
             }
         }
-    }
-    if(fechaEncontrada){
-        cout << "Desea ver el detalle? (s/n): ";
-        cin >> opcion;
-        cout << endl;
-
-        if(opcion == 's' || opcion == 'S'){
-            int cantReg = fdet.Contar_Registro();
-
-
-            for(int i = 0; i < cantReg; i ++){
-                detalle = fdet.Leer_Registro(i);
-                if(detalle.getVenta().getID() == venta.getID()){
-                    detalle.Mostrar();
-                    cout << endl;
-                    break;
-                }
-
-            }
-        }
-        else{
-            venta.Mostrar();
-        }
-    }
-    else{
-        cout << "No se encontraron ventas en esa fecha." << endl;
     }
 }
 
