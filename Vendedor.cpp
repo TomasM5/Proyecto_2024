@@ -29,7 +29,9 @@ void Vendedor::Cargar(){
     setLegajo(leg);
     setIngreso(ing);
     setSalarioBase(sal);
+    setComision(0);
     setEstado(1);
+    salarioTotal();
 }
 
 void Vendedor::Mostrar(){
@@ -64,8 +66,6 @@ void Vendedor::salarioTotal(){
     sal= getSalarioBase() + getComision();
 
     setSalarioTotal(sal);
-
-    // agregar webadas como obra social y aportes?
 }
 
 int ArchivoVendedores::Contar_Registro() {
@@ -101,6 +101,34 @@ Vendedor ArchivoVendedores::Leer_Registro(int pos){
         fread(&reg, sizeof reg,1, p);
         fclose(p);
         return reg;
+}
+
+void ArchivoVendedores::Copia_Seguridad(){
+    Vendedor reg;
+    FILE *copia=fopen("copia_seguridad_vendedores.dat", "wb");
+
+    int cantidad=Contar_Registro();
+
+    for (int i=0; i<cantidad; i++) {
+        reg=Leer_Registro(i);
+        fwrite(&reg, sizeof(reg), 1, copia);
+    }
+    fclose (copia);
+    cout << "Copia de seguridad realizada exitosamente." << endl;
+
+}
+
+void ArchivoVendedores::Restaurar(){
+    Vendedor reg;
+    ArchivoVendedores copia("copia_seguridad_vendedores.dat");
+    int cant=copia.Contar_Registro();
+
+    for(int i=0; i<cant; i++){
+        reg=copia.Leer_Registro(i);
+        Grabar_Registro(reg);
+    }
+
+    cout << "Copia de seguridad restaurada exitosamente." << endl;
 }
 
 void Vendedor::registrarVendedor(){ ///carga un nuevo vendedor y lo guarda en el archivo
@@ -167,7 +195,7 @@ void Vendedor::calcularSalarios(){///calcular y actualiza los salarios de todos 
     bool encontrado = false;
     while(fread(&vendedor, sizeof(Vendedor), 1, file)){
         vendedor.salarioTotal();
-        fseek(file, -sizeof(Vendedor), SEEK_CUR);
+        fseek(file, sizeof(Vendedor), SEEK_CUR);
         fwrite(&vendedor, sizeof(Vendedor), 1, file);
     }
     fclose(file);

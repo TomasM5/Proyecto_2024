@@ -52,6 +52,8 @@ class ArchivoVendedores{
         Vendedor Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Vendedor reg);
+        void Copia_Seguridad();
+        void Restaurar();
 
 };
 
