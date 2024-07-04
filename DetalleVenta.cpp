@@ -21,6 +21,7 @@ void DetalleVenta::Cargar() {
     cin >> _Monto;
     cout << "Descuento: "; ///revisar tipos de descuentos:
     cin >> _Descuento;     ///banco, metodo de pago (efectivo), etc.
+
 }
 
 void DetalleVenta::Mostrar() {
@@ -84,32 +85,41 @@ int ArchivoDetalle::Contar_Registro() {
 
 void ArchivoDetalle::Copia_Seguridad(){
     DetalleVenta reg;
-    FILE *copia=fopen("copia_seguridad_detalle.dat", "wb");
+    Venta v;
+    FILE *copiadet=fopen("copia_seguridad_detalle.dat", "wb");
+    FILE *copiaven=fopen("copia_seguridad_ventas.dat", "wb");
 
     int cantidad=Contar_Registro();
 
     for (int i=0; i<cantidad; i++) {
         reg=Leer_Registro(i);
-        fwrite(&reg, sizeof(reg), 1, copia);
+        v=reg.getVenta();
+        fwrite(&reg, sizeof(reg), 1, copiadet);
+        fwrite(&v, sizeof(v), 1, copiaven);
     }
-    fclose (copia);
+    fclose (copiadet);
+    fclose (copiaven);
     cout << "Copia de seguridad realizada exitosamente." << endl;
 
 }
 
 void ArchivoDetalle::Restaurar(){
     DetalleVenta reg;
+    Venta v;
     ArchivoDetalle copia("copia_seguridad_detalle.dat");
+    ArchivoVentas copiaven("copia_seguridad_ventas.dat");
+    ArchivoVentas ven("ventas.dat");
     int cant=copia.Contar_Registro();
 
     for(int i=0; i<cant; i++){
         reg=copia.Leer_Registro(i);
+        v=copiaven.Leer_Registro(i);
+        ven.Grabar_Registro(v);
         Grabar_Registro(reg);
     }
 
     cout << "Copia de seguridad restaurada exitosamente." << endl;
 }
-
 
 bool ArchivoDetalle::borrarContenidoArchivo() {
     FILE *file = fopen(nombre, "wb");

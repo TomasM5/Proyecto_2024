@@ -11,6 +11,7 @@
 #include "Venta.h"
 #include "DetalleVenta.h"
 #include "Compra.h"
+#include "rlutil.h"
 
 
 #endif // HEADERS_H_INCLUDED

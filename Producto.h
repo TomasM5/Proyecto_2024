@@ -10,7 +10,7 @@ class Producto{
         Producto();
 
         void Cargar();
-        void Mostrar();
+        void Mostrar(int fila);
 
         void setID(int val){ _ID = val;}
         void setMarca(const char *val){ strcpy(_Marca, val);}
@@ -36,6 +36,7 @@ class Producto{
         void buscarProductoPorCategoria();
         void buscarProductoPorRangoPrecio();
         void buscarProductoPorFechaIngreso();
+        void registrarProductosEnLote();
 
         //  TODO
         void ordenarPrecio(Producto *registros,int cantidad, char *orden);
@@ -78,10 +79,10 @@ class ArchivoProductos {
         Producto Leer_Registro(int pos);
         int Contar_Registro ();
         bool Grabar_Registro(Producto reg);
-
         void Copia_Seguridad();
         void Restaurar();
-
+        bool existeID(int id);
+        bool borrarContenidoArchivo();
 };
 
 #endif // PRODUCTO_H_INCLUDED
