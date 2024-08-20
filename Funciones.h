@@ -111,6 +111,7 @@ void Menu_Clientes(){
     cout << "4 - Buscar DNI" << endl;
     cout << "5 - Buscar nombre" << endl;
     cout << "6 - Borrar archivo cliente" << endl;
+    cout << "7 - Baja de cliente" << endl;
     cout << endl;
     cout << "0 - Volver al menu principal" << endl;
     cout << endl << endl;
@@ -143,6 +144,9 @@ void SubMenuClientes(){
                 break;
             case 6:
                 archiC.borrarContenidoArchivo();
+                break;
+            case 7:
+                cliente.Baja();
                 break;
             case 0:
                 cout << "Volviendo al menú principal..." << endl;

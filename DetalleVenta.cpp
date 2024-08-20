@@ -256,11 +256,13 @@ void ArchivoDetalle::listarProductosPorCategoria() {
 
     int cantReg = pdet.Contar_Registro();
 
+    int fila=20;
     for (int i = 0; i < cantReg; i++) {
         prod = pdet.Leer_Registro(i);
         if (prod.getCategoria() == categoria) {
             encontrado = true;
-            prod.Mostrar();
+            prod.Mostrar(fila);
+            fila++;
             cout << endl;
         }
     }

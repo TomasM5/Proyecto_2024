@@ -28,6 +28,7 @@ class Cliente : public Persona{
         void buscarClientePorID();
         void buscarClientePorDNI();
         void buscarClientePorNombre();
+        void Baja();
 
     protected:
 

@@ -222,15 +222,34 @@ void Producto::buscarProductoPorCategoria(){
     cin >> categoria;
 
     bool encontrado = false;
+    cout <<endl;
+
+    int fila=25;
+    gotoxy(2,fila);
+    cout << "ID" ;
+    gotoxy(6,fila);
+    cout<< "Marca" ;
+    gotoxy(12,fila);
+    cout<< "Descripcion" ;
+    gotoxy(50,fila);
+    cout<< "Categoria" ;
+    gotoxy(60,fila);
+    cout<< "Stock";
+    gotoxy(70,fila);
+    cout<< "Valor" ;
+    gotoxy(80,fila);
+    cout<< "Estado" ;
+    gotoxy(90,fila);
+    cout<< "Fecha de ingreso";
+    cout << endl;
 
     int cantReg = file.Contar_Registro();
-    int fila=16;
     for(int i = 0; i < cantReg; i ++){
         prod = file.Leer_Registro(i);
         if(prod.getCategoria() == categoria && prod.getEstado()){
             encontrado = true;
-            prod.Mostrar(fila);
             fila++;
+            prod.Mostrar(fila);
             cout << endl;
         }
     }

@@ -215,3 +215,24 @@ bool ArchivoClientes::borrarContenidoArchivo(){
     cout << "Contenido del archivo borrado exitosamente." << endl;
     return true;
 }
+
+void Cliente:: Baja() {
+    int id, cant;
+    Cliente aux;
+    ArchivoClientes arch("clientes.dat");
+    FILE *f=fopen("clientes.dat", "rb+");
+    cout << "ingrese id del cliente a dar de baja";
+    cin >> id;
+
+    cant=arch.Contar_Registro();
+    for (int i=0; i<cant; i++) {
+        aux=arch.Leer_Registro(i);
+        if (id==aux.getID()) {
+            aux.setEstado(0);
+            fseek(f, sizeof(Cliente)*i,0);
+            fwrite(&aux, sizeof(aux), 1, f);
+            break;
+        }
+    }
+    fclose(f);
+}
